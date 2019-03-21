@@ -1,0 +1,129 @@
+.form-container {
+  position:fiexd;
+  width:50%;
+  margin-left: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: #E8E1E1;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.floatRight{
+	float:right;
+	margin-right: 18px;
+}
+
+.has-error{
+	color:red;
+}
+
+#headertext{
+	font-size:50px;
+	font-color:#ffff;
+}
+
+#trheight{
+	height: 100px;
+    width: 1000px;
+	
+}
+
+#header{
+    height: 60px;
+    width: 1000px;
+    background-color:#375c99;	
+}
+
+#maintable{
+    height: 700px;
+    width: 1200px;
+    background-color:#fffff;
+    	
+    
+}
+
+#loginbutton {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+
+#footerbar{
+    height:10px;
+    width:1000px;
+	background-color:#375c99;
+}
+
+#menuheader{
+	height:10px;
+    width:1000px;
+	background-color:#22A7F0;
+}
+
+#reg{
+ font-size:15px;	
+ color:red;
+ text-decoration:none;
+ 	
+}
+
+#logo img {
+    width: 70px;
+    vertical-align: middle;
+    margin-right:2px;
+}
+
+.success{
+  position:fiexd;
+  width:50%;
+  margin-left: 50px;
+  margin-top:20px;
+  padding: 20px;
+  background-color: #E8E1E1;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tr:nth-child(even) {background-color: #f2f2f2;}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 8px 10px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  color: white;
+  
+}
+table {
+  align:center;
+  border-collapse: collapse;
+  
+ 
+}
+
+.container {
+  padding: 16px;
+}
+
+p{
+	color: red;
+    text-align:justify;
+    }
+

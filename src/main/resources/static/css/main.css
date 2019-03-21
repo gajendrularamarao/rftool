@@ -1,0 +1,40 @@
+body {
+   
+    widht=80%;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+}
+
+.maintable{
+   width=800;
+   height=900;
+   cellspacing="5px";
+   padding=2px;	
+}
+
+h1 {
+    text-align: center;
+    display: block;
+    font-size: 2em;
+    margin-top: 0.67em;
+    margin-bottom: 0.67em;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: bold;
+    color:blue;
+}
+h2 {
+    text-align: left;
+    display: block;
+    font-size: 1em;
+    margin-top: 0.67em;
+    margin-bottom: 0.67em;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: bold;
+    color:#008040;
+}
+a {
+   
+    font-weight: bold;
+    color:blue;
+}
