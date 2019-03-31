@@ -16,8 +16,8 @@ public class Userservice implements IUserservice {
 
 	@Override
 	public void save(User user) {
-		// TODO Auto-generated method stub
 		
+		userDAO.save(user);
 	}
 
 	@Override

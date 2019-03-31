@@ -44,16 +44,19 @@
       
       <td width="50%" align="center">  
      
-          <form:form method="POST" modelAttribute="user" action="login">
-          <table width="50%	" border="1" align="center" height="150">
-            <tr > <td>  <h2>Log in</h2>   </td></tr>
-            <tr><td><form:input path="mailid" type="text" placeholder="Enter Mail ID"  name="mailid"/>
-              </td></tr>
-            <tr><td> <form:input path="userpass" type="password" placeholder="Enter Password" name="userpass"/>
-            </td></tr>
-                 <tr><td align="center"> <form:button type="submit" >Login </form:button><a href="${contextPath}/registration" id="reg"> Registration</a></td> </tr>
+          
+          <table width="80%" border="1" align="center" height="100">
+            <tr><td align="center">  <h2>You have successfully Registration completed...</h2> </td></tr>
+            <c:forEach var="User" items="${list}"> 
+            <tr><td id="regdisplay" >Your Registration Number :  ${User.userid}</td>  </tr>
+            <tr><td id="regdisplay">your Login ID : ${User.mailid}</td>  </tr>
+            <tr><td id="regdisplay">Name :  ${User.username}</td></tr>
+            <tr><td id="regdisplay">Designation :${User.userroll}</td> </tr>
+            <tr><td id="reg"><a href="/">Please Login</a></td> </tr>
+            
+            </c:forEach>
             </table>      
-        </form:form>
+        
      </td>
       </tr>
       

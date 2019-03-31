@@ -29,9 +29,32 @@ public class UserDAO implements IUser {
 	
 
 	@Override
-	public void save(User p) {
-		// TODO Auto-generated method stub
-		
+	public User save(User p) {
+		 System.out.print("enter User Registration Save");
+		String sql="INSERT INTO user_details (userid, user_name, user_roll, user_mailid, user_pass)"
+				+ " VALUES (0, ' "+p.getUsername()+"','"+p.getUserroll()+ "', '"+ p.getMailid()+ "', '"+p.getUserpass() +" ');";
+		System.out.println(sql);
+	     template.update(sql);
+	     
+	     System.out.print("enter user logn Query");
+			return template.query("SELECT * FROM user_details WHERE userid=(SELECT MAX(userid) FROM user_details);" ,new ResultSetExtractor<User>(){  
+			    
+			     public User extractData(ResultSet rs) throws SQLException,  
+			            DataAccessException {  
+			      
+			     User user= new User();
+			        while(rs.next()){  
+			       
+			        user.setUserid(rs.getInt(1));
+			        user.setUsername(rs.getString(2));
+			        user.setUserroll(rs.getString(3));
+			        user.setMailid(rs.getString(4));
+			        user.setUserpass(rs.getString(5));
+			        }  
+			        return user;  
+			        }  
+			    });
+	     
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package com.rf.rftool.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -52,7 +53,7 @@ public class HomeController {
   
   @RequestMapping(value ="/login",method = RequestMethod.POST)
  public String login(@Valid User user,
-				BindingResult result, ModelMap model,RedirectAttributes redirectAttributes) {
+				BindingResult result, ModelMap model,RedirectAttributes redirectAttributes , HttpServletRequest request) {
 
 	
 	 User user1 = userService.getUser(user);		
@@ -60,11 +61,37 @@ public class HomeController {
 	//return "redirect:/viewstudents/1";//will redirect to viewemp request mapping 
      System.out.println(user1.getUserid());
      System.out.println(user1.getUsername());
+     request.getSession().setAttribute("USER_DETAILS",user1);
     model.addAttribute("user", user1);
 	return "userloged";
 		}
+  @RequestMapping(value="/registration", method = RequestMethod.GET)
+  public String getRegistration(ModelMap model) {
+  	   User user = new User();
+  	   model.addAttribute("user",user);
+  		return "registration";
+  	}  
   
-  
+  @SuppressWarnings("null")
+@RequestMapping(value ="/regsubmit",method = RequestMethod.POST)
+  public ModelAndView saveUserRegistration(@Valid User user,
+ 				BindingResult result, ModelMap model,RedirectAttributes redirectAttributes) {
+	  System.out.print("enter User Registration submit");
+ 	if (result.hasErrors()) {
+ 				//return "escalationReg";//will redirect to viewemp request mapping  
+ 				return new ModelAndView("registration"); 
+ 		}
+ 	userService.save(user);	
+ 	User user2 = userService.getUser(user);
+ 	System.out.print(user2.getUserid());
+ 	System.out.print(user2.getUsername());
+ 	 List<User> list= new ArrayList<User>();;
+ 	 list.add(user2);
+    redirectAttributes.addFlashAttribute("message", "User" + user2.getUserid()+" "+ user2.getUsername() + " saved");
+ 	//return "redirect:/viewstudents/1";//will redirect to viewemp request mapping 
+ 	return new ModelAndView("usercreated","list",list); 
+ 		}
+    
   
   
 @RequestMapping(value="/", method = RequestMethod.GET)
@@ -74,6 +101,14 @@ public String getHomePage(ModelMap model) {
 		return "index";
 	}
 
+@RequestMapping(value="/escalationform", method = RequestMethod.GET)
+public String getescalationform(ModelMap model , HttpSession session) {
+	Escalations escalations = new Escalations();
+	User user1 = (User) session.getAttribute("USER_DETAILS");
+	model.addAttribute("user",user1);
+	model.addAttribute("escalations", escalations);
+	 	return "escalationform";
+	}
 @RequestMapping("/users")  
 public ModelAndView viewstudents(){  
     List<User> list= userService.getAllUsers();

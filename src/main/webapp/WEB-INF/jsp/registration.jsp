@@ -7,9 +7,21 @@
 <%@ page isELIgnored="false" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
+
 <!DOCTYPE html>
 <html>
 <head>
+<script type="text/javascript">
+    function Validate() {
+        var password = document.getElementById("txtPassword").value;
+        var confirmPassword = document.getElementById("txtConfirmPassword").value;
+        if (password != confirmPassword) {
+            alert("Passwords do not match.");
+            return false;
+        }
+        return true;
+    }
+</script>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title>OX Escalation Tool </title>
 	<link href="${contextPath}/css/bootstrap.css"      rel="stylesheet">
@@ -42,22 +54,23 @@
        combined with adaptive modulation and power control. Frequency band is 2-8 GHz. 
        it gives the ability for world wide roaming to access cell anywhere.</font></p>  </td>
       
-      <td width="50%" align="center">  
-     
-          <form:form method="POST" modelAttribute="user" action="login">
-          <table width="50%	" border="1" align="center" height="150">
-            <tr > <td>  <h2>Log in</h2>   </td></tr>
-            <tr><td><form:input path="mailid" type="text" placeholder="Enter Mail ID"  name="mailid"/>
-              </td></tr>
-            <tr><td> <form:input path="userpass" type="password" placeholder="Enter Password" name="userpass"/>
-            </td></tr>
-                 <tr><td align="center"> <form:button type="submit" >Login </form:button><a href="${contextPath}/registration" id="reg"> Registration</a></td> </tr>
-            </table>      
-        </form:form>
+      <td width="90%" align="center">  
+        <div class="container">
+          <form:form method="POST" modelAttribute="user" action="regsubmit">
+          <table width="80%	" border="1" align="center" height="100">
+            <tr > <td>  <h2>Registration</h2>   </td></tr>
+            <tr><td> <label for="email">Email  :</label> <form:input path="mailid" type="text" placeholder="Enter Mail ID" name="mailid"/></td></tr>
+            <tr><td><label for="email">User name :</label> <form:input path="username" type="text" placeholder="username"  name="mailid"/></td></tr>
+            <tr><td><label for="Designation">Designation : </label><form:input path="userroll" type="text" placeholder="userroll"  name="userroll"/></td></tr>
+            <tr><td><label for="Designation">Password : </label> <form:input path="userpass" type="password" placeholder="Enter Password" name="userpass"/></td></tr>
+            <tr><td> <label for="psw-repeat">Repeat Password : </label>
+            <input type="password" placeholder="Confirm Password" name="psw-repeat"  required></td><tr>
+            <tr><td align="center"><form:button type="submit" id="loginbutton" onclick="return Validate()">submit </form:button></td></tr>
+          </table> 
+         </form:form>
+        </div>
      </td>
       </tr>
-      
-      
       </table>
     
     </td> 

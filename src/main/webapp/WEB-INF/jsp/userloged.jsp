@@ -16,28 +16,37 @@
 	<link href="${contextPath}/css/custom.css"      rel="stylesheet">
 	<link href="${contextPath}/css/main.css"      rel="stylesheet">
 	
-	
 </head>
 <body>
   <table align="center" border="0" width="85%" >
    <tr id="header" ><td id="logo"><jsp:include page="header.jsp"></jsp:include> </td></tr>
   <tr id="menuheader">
    <td><table border="0" width="100%" align="center">
-    <tr><td width="50%" align="right" ><div class="topnav"><a href="#home">Home</a>
-                                <a href="#news">Escalation</a></div></td>
-         <td width="20%" align="left">Welcome.. <font> ${user.username} </font> </td>                       
-                                
-         <td width="40%" align="center"><a href="#" id="reg"> Registration</a></td> 
-         <td width="10%" align="right"><a href="${contextPath}/logout" id="reg"> logout</a></td> </tr>
+    <tr><td width="50%" align="right" ><div class="topnav"><a href="${contextPath}/">Home</a>
+          <a href="#">Escalation</a></div></td>
+         <td width="20%" align="left">Welcome.. <font font="2" color=red> ${user.username} </font> </td>                       
+         <td width="10%" align="right"><a href="${contextPath}/logout" id="log">Logout</a></td> </tr>
       </table>
     </td>
    </tr> 
     <tr bgcolor="#E3F1EC">
      <td>
       <table width="100%"  border="2" align="center" height="450">
-      <tr valign="middle" height="100" >
-      <td width="50%" align="left"> Test Area  </td>
-      <td width="50%" align="center">  
+      <tr valign="top" height="100" >
+      <td width="10%" align="left"> 
+      
+      <table> 
+      <tr><td id="reg"><a href="#">Escalation DashBoard</a></td></tr>
+      <tr><td id="reg"><a href="${contextPath}/escalationform">Escalation POST</a></div></td></tr>
+      <tr><td id="reg"><a href="#">get EscalationList </a></div> </td></tr>
+      </table>
+       </td>
+      <td width="90%" align="center">  
+     
+      <H1> Escalation DASH BOARD >>>>>>>>>></H1>
+      
+      
+      
      </td>
       </tr>
       
