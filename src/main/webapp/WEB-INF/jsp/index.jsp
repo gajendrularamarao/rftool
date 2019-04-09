@@ -22,7 +22,7 @@
    <tr id="header" ><td id="logo"><jsp:include page="header.jsp"></jsp:include> </td></tr>
   <tr id="menuheader">
    <td><table border="0" width="100%" align="center">
-    <tr><td width="50%" align="right" ><div class="topnav"><a href="#home">Home</a>
+    <tr><td width="50%" align="right" ><div class="topnav"><a href="/">Home</a>
          <td width="20%" align="left">Welcome.. </td>                       
         </tr>
       </table>
@@ -48,8 +48,10 @@
           <table width="50%	" border="1" align="center" height="150">
             <tr > <td>  <h2>Log in</h2>   </td></tr>
             <tr><td><form:input path="mailid" type="text" placeholder="Enter Mail ID"  name="mailid"/>
+                     <form:errors path="mailid" cssStyle="color: #ff0000; font-size: 10px;"> </form:errors>
               </td></tr>
             <tr><td> <form:input path="userpass" type="password" placeholder="Enter Password" name="userpass"/>
+                     <form:errors path="userpass" cssStyle="color: #ff0000;font-size: 10px;"> </form:errors>
             </td></tr>
                  <tr><td align="center"> <form:button type="submit" >Login </form:button><a href="${contextPath}/registration" id="reg"> Registration</a></td> </tr>
             </table>      

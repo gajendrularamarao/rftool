@@ -1,6 +1,7 @@
 package com.rf.rftool.model;
 
 import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 public class Escalations {
@@ -9,6 +10,7 @@ public class Escalations {
 	private int id;
 	
 	@NotNull
+	@NotEmpty( message = "Please enter the site ID" )
 	private String siteid;
      @NotNull
 	private String sitename;
@@ -16,12 +18,17 @@ public class Escalations {
 	private String technology;
 	private String site_status;
 	private String ro_region;
+	@NotEmpty( message = "please select the" )
 	private String project_scope;
+	@NotEmpty
 	private String startdate;
 	private String enddate;
+	@NotEmpty
 	private String status;
 	private String originator_mail;
+	@NotEmpty
 	private String responsible;
+	@NotEmpty
 	private String category;
 	private String problem_description;
 	private String requested_action_history;

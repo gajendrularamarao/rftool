@@ -34,7 +34,7 @@
    <tr id="header" ><td id="logo"><jsp:include page="header.jsp"></jsp:include> </td></tr>
   <tr id="menuheader">
    <td><table border="0" width="100%" align="center">
-    <tr><td width="50%" align="right" ><div class="topnav"><a href="#home">Home</a>
+    <tr><td width="50%" align="right" ><div class="topnav"><a href="/">Home</a>
          <td width="20%" align="left">Welcome.. </td>                       
         </tr>
       </table>
@@ -59,12 +59,12 @@
           <form:form method="POST" modelAttribute="user" action="regsubmit">
           <table width="80%	" border="1" align="center" height="100">
             <tr > <td>  <h2>Registration</h2>   </td></tr>
-            <tr><td> <label for="email">Email  :</label> <form:input path="mailid" type="text" placeholder="Enter Mail ID" name="mailid"/></td></tr>
-            <tr><td><label for="email">User name :</label> <form:input path="username" type="text" placeholder="username"  name="mailid"/></td></tr>
-            <tr><td><label for="Designation">Designation : </label><form:input path="userroll" type="text" placeholder="userroll"  name="userroll"/></td></tr>
-            <tr><td><label for="Designation">Password : </label> <form:input path="userpass" type="password" placeholder="Enter Password" name="userpass"/></td></tr>
-            <tr><td> <label for="psw-repeat">Repeat Password : </label>
-            <input type="password" placeholder="Confirm Password" name="psw-repeat"  required></td><tr>
+            <tr><td> <label for="email">Email  :</label> <form:input path="mailid" type="text" placeholder="Enter Mail ID" name="mailid"/><form:errors path="mailid" cssStyle="color: #ff0000; font-size: 10px;" > </form:errors> </td> </tr>
+            <tr><td><label for="email">User name :</label> <form:input path="username" type="text" placeholder="username"  name="mailid"/><form:errors path="username" cssStyle="color: #ff0000; font-size: 10px;" > </form:errors></td></tr>
+            <tr><td><label for="Designation">Designation : </label><form:input path="userroll" type="text" placeholder="userroll"  name="userroll"/><form:errors path="userroll" cssStyle="color: #ff0000; font-size: 10px;"> </form:errors></td></tr>
+            <tr><td><label for="Designation">Password : </label> <form:input path="userpass" type="password" placeholder="Enter Password" name="userpass"/><form:errors path="userpass" cssStyle="color: #ff0000; font-size: 10px;"></form:errors></td> </tr>
+            <tr><td> <label for="psw-repeat">Confirm Password : </label>
+            <input type="password" placeholder="Confirm Password" name="psw-repeat"></td><tr>
             <tr><td align="center"><form:button type="submit" id="loginbutton" onclick="return Validate()">submit </form:button></td></tr>
           </table> 
          </form:form>

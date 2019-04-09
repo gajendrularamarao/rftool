@@ -11,6 +11,10 @@ body {
    padding=2px;	
 }
 
+.error {
+	color: #ff0000;
+}
+
 h1 {
     text-align: center;
     display: block;

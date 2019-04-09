@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.rf.rftool.dao.IEscalations;
 import com.rf.rftool.model.Escalations;
+import com.rf.rftool.model.User;
 
 @Service
 public class EscalationsDAO implements IEscalations {
@@ -21,8 +22,8 @@ JdbcTemplate template;
 		template = new JdbcTemplate(dataSource);
 	}
 	
-	public void save(Escalations e){
-		
+	public void save(Escalations e , User user){
+			
 		String sql="insert into ssaescalation(siteid,\n" + 
 				"sitename,\n" + 
 				"technology,\n" + 
@@ -43,7 +44,7 @@ JdbcTemplate template;
 				"','"+e.getSite_status()+"','"+e.getRo_region()+"','"+e.getProject_scope()+
 				"','"+e.getStartdate()+"','"+e.getEnddate()+"','"+e.getStatus()+"','"+e.getOriginator_mail()+
 				"','"+e.getResponsible()+"','"+e.getCategory()+"','"+e.getProblem_description()+"','"+e.getRequested_action_history()+"','" +e.getMail_reference()+
-				"',"+e.getLead_time_in_days()+","+100+")";
+				"',"+e.getLead_time_in_days()+","+user.getUserid()+")";
 		System.out.println(sql);
 	     template.update(sql);  
 		

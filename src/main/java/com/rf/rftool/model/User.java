@@ -3,23 +3,33 @@ package com.rf.rftool.model;
 import java.io.Serializable;
 
 import javax.persistence.Id;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 public class User implements Serializable {
 	
-	@Id @NotNull
+	@Id 
 	private int userid;
 	
 	@NotNull
+	@NotEmpty 
 	private String username;
 	
 	@NotNull
+	@NotEmpty
 	private String userroll;
 	
+	
 	@NotNull
+	@Email
+	@NotEmpty
 	private String mailid;
 	
 	@NotNull
+	@Size(min = 6, max = 15)
+	@NotEmpty
 	private String userpass;
 	
 	public int getUserid() {

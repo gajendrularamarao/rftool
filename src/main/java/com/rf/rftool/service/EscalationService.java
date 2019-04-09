@@ -16,10 +16,8 @@ public class EscalationService implements IEscalationservice {
 	EscalationsDAO escalationsDAO;
 
 	@Override
-	public void save(Escalations e) {
-		
-		escalationsDAO.save(e);
-		
+	public void save(Escalations e , User user) {
+		escalationsDAO.save(e , user);
 	}
 
 	@Override

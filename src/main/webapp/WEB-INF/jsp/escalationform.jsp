@@ -46,9 +46,10 @@
       <form:form method="POST" modelAttribute="escalations" action="save">
 	 
 	  <table align=center border="1" style="width:70%">
+	            <tr> <c:out value="${error.siteid}"></c:out>  </tr>
 				<tr>
 					<td>site ID</td>
-					<td> <form:input type="text" path="siteid" id="siteid" />  </td>
+					<td> <form:input type="text" path="siteid" id="siteid" /> <form:errors path="siteid" cssClass="error" > </form:errors> </td>
 					<td>site Name</td>
 					<td> <form:input type="text" path="sitename" id="sitename" />  </td>
 				</tr>
@@ -62,8 +63,14 @@
 					<td>RO Region</td>
 					<td><form:input type="text" path="ro_region" id="ro_region" /></td>
 					<td>Project Scope</td>
-					<td> <form:input type="text" path="project_scope" id="project_scope" />  </td>
-
+					<td> 
+					    <form:select path="project_scope" id="project_scope">
+                           <form:option value="NONE" label="--- Select ---"/>
+                             <c:forEach var="item" items="${projectscopelist}">
+                         <form:option value="${item.projectscopeid}">${item.projectscopename}</form:option>
+                        </c:forEach>
+                       </form:select> <form:errors path="project_scope" cssClass="error" > </form:errors>
+                  	 </td>
 				<tr>
 					<td>Start Date</td>
 					<td><form:input type="text" path="startdate" id="startdate"/></td>
@@ -72,16 +79,41 @@
 				</tr>
 				<tr>
 					<td>Status</td>
-					<td><form:input type="text"  path="status" id="status" /></td>
+					<td><form:select path="status" id="status">
+                         <form:option value="NONE" label="--- Select ---"/>
+                         <c:forEach var="item" items="${statuslist}">
+                         <form:option value="${item.statusid}">${item.statusname}</form:option>
+                        </c:forEach>
+                        
+                        </form:select>
+					</td>
 					<td>Originator Mail</td>
 					<td> <form:input type="text" path="originator_mail" id="originator_mail" />  </td>
 				</tr>
 				
 					<tr>
 					<td>Responsible</td>
-					<td><form:input type="text" path="responsible" id="responsible" /></td>
+					<td>
+					<form:select path="responsible" id="responsible" >
+					<form:option value="NONE" label="--- Select ---"/>
+                         <c:forEach var="item" items="${responsiblelist}">
+                         <form:option value="${item.responsibleid}">${item.responsiblename}</form:option>
+                        </c:forEach>
+                        
+                        </form:select>
+					
+					
+					</td>
+					
 					<td>category</td>
-					<td> <form:input type="text" path="category" id="category" />  </td>
+					<td><form:select path="category" id="category">
+                         <form:option value="NONE" label="--- Select ---"/>
+                         <c:forEach var="item" items="${categoryList}">
+                         <form:option value="${item.categoryid}">${item.categoryname}</form:option>
+                        </c:forEach>
+                        
+                        </form:select>
+					</td>
 				</tr>
 				 
 				 <tr>
