@@ -29,14 +29,16 @@ public class UserDAO implements IUser {
 	
 
 	@Override
-	public User save(User p) {
+	public User save(User p) throws SQLException   {
 		 System.out.print("enter User Registration Save");
 		String sql="INSERT INTO user_details (userid, user_name, user_roll, user_mailid, user_pass)"
 				+ " VALUES (0, ' "+p.getUsername()+"','"+p.getUserroll()+ "', '"+ p.getMailid()+ "', '"+p.getUserpass() +" ');";
 		System.out.println(sql);
-	     template.update(sql);
 	     
-	     System.out.print("enter user logn Query");
+		 int check = template.update(sql);
+	     
+	     System.out.print("enter user logn Query" + check);
+	     
 			return template.query("SELECT * FROM user_details WHERE userid=(SELECT MAX(userid) FROM user_details);" ,new ResultSetExtractor<User>(){  
 			    
 			     public User extractData(ResultSet rs) throws SQLException,  
@@ -120,6 +122,46 @@ public class UserDAO implements IUser {
 		
 		
 		
+	}
+
+
+
+	@Override
+	public Boolean userExitingChecking(User p) {
+		
+		Boolean isAvailableUser=false;
+		
+		List<User> user  = template.query("select * from user_details",new ResultSetExtractor<List<User>>(){  
+		    
+		     public List<User> extractData(ResultSet rs) throws SQLException,  
+		            DataAccessException {  
+		      
+		        List<User> list=new ArrayList<User>();  
+		        while(rs.next()){  
+		        User e=new User();  
+		        e.setUserid(rs.getInt(1));
+		        e.setUsername(rs.getString(2));
+		        e.setUserroll(rs.getString(3));
+		        e.setMailid(rs.getString(4));
+		        e.setUserpass(rs.getString(5));
+		        
+		          list.add(e);  
+		        }  
+		        return list;  
+		        }  
+		    });
+		
+		for( int i=0; i<user.size(); i++)
+		{
+		  if(user.get(i).getMailid().equalsIgnoreCase(p.getMailid())) {
+			  isAvailableUser=true;
+		  }
+			
+		}
+		
+		
+		return isAvailableUser;
+	
 	}
 
 	

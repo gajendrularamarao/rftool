@@ -1,5 +1,7 @@
 package com.rf.rftool.controller;
 
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -109,20 +111,43 @@ public String getHomePage(ModelMap model) {
   public ModelAndView saveUserRegistration(@Valid User user,
  				BindingResult result, ModelMap model,RedirectAttributes redirectAttributes) {
 	  System.out.print("enter User Registration submit");
+	  String userExising="Already User Registred";
  	if (result.hasErrors()) {
  				//return "escalationReg";//will redirect to viewemp request mapping  
  				return new ModelAndView("registration"); 
  		}
- 	userService.save(user);	
- 	User user2 = userService.getUser(user);
- 	System.out.print(user2.getUserid());
- 	System.out.print(user2.getUsername());
- 	 List<User> list= new ArrayList<User>();;
- 	 list.add(user2);
-    redirectAttributes.addFlashAttribute("message", "User" + user2.getUserid()+" "+ user2.getUsername() + " saved");
- 	//return "redirect:/viewstudents/1";//will redirect to viewemp request mapping 
- 	return new ModelAndView("usercreated","list",list); 
+ 	try {
+		
+ 		if(userService.userExitingChecking(user)) {
+ 			System.out.println("User exiting>>>>....");
+ 			model.addAttribute("UserExiting" ,userExising);
+ 			return new ModelAndView("registration");
  		}
+ 		else
+ 		{
+ 		userService.save(user);
+ 		User user2 = userService.getUser(user);
+ 	 	System.out.print(user2.getUserid());
+ 	 	System.out.print(user2.getUsername());
+ 	 	List<User> list= new ArrayList<User>();;
+ 	 	list.add(user2);
+ 	    redirectAttributes.addFlashAttribute("message", "User" + user2.getUserid()+" "+ user2.getUsername() + " saved");
+ 	 	//return "redirect:/viewstudents/1";//will redirect to viewemp request mapping 
+ 	 	return new ModelAndView("usercreated","list",list);
+ 		}
+		
+	    } catch (SQLIntegrityConstraintViolationException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		System.out.print("duplicaton User Exception>>>>>>>>"+e);
+	    } catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		System.out.print("duplicaton User Exception>>>>>>>>"+e);
+	    }	
+ 	return new ModelAndView("registration");
+  } 
+ 		
     
   
 

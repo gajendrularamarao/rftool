@@ -42,7 +42,7 @@
       </table>
        </td>
       <td width="90%" align="center">  
-     
+       <font size="4" color="red" face="verdana" > Escalation Form </font>
       <form:form method="POST" modelAttribute="escalations" action="save">
 	 
 	  <table align=center border="1" style="width:70%">

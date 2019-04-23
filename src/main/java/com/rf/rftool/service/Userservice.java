@@ -1,5 +1,6 @@
 package com.rf.rftool.service;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ public class Userservice implements IUserservice {
     UserDAO userDAO;
 
 	@Override
-	public void save(User user) {
+	public void save(User user) throws SQLException  {
 		
 		userDAO.save(user);
 	}
@@ -42,6 +43,14 @@ public class Userservice implements IUserservice {
 	public User getUser(User p) {
 		
 		return userDAO.getUser(p);
+	}
+
+	@Override
+	public Boolean userExitingChecking(User p) {
+		   
+		 
+		
+		 return userDAO.userExitingChecking(p);
 	}
 	
 	

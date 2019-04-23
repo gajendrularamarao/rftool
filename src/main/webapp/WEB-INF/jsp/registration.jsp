@@ -58,7 +58,7 @@
         <div class="container">
           <form:form method="POST" modelAttribute="user" action="regsubmit">
           <table width="80%	" border="1" align="center" height="100">
-            <tr > <td>  <h2>Registration</h2>   </td></tr>
+            <tr > <td>  <h2>Registration</h2> <font size="2"  face="arial,helvetica" color="red"> ${UserExiting} </font> </td></tr>
             <tr><td> <label for="email">Email  :</label> <form:input path="mailid" type="text" placeholder="Enter Mail ID" name="mailid"/><form:errors path="mailid" cssStyle="color: #ff0000; font-size: 10px;" > </form:errors> </td> </tr>
             <tr><td><label for="email">User name :</label> <form:input path="username" type="text" placeholder="username"  name="mailid"/><form:errors path="username" cssStyle="color: #ff0000; font-size: 10px;" > </form:errors></td></tr>
             <tr><td><label for="Designation">Designation : </label><form:input path="userroll" type="text" placeholder="userroll"  name="userroll"/><form:errors path="userroll" cssStyle="color: #ff0000; font-size: 10px;"> </form:errors></td></tr>
