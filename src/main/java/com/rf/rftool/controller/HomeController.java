@@ -61,14 +61,31 @@ public class HomeController {
 		}
 	    
   @RequestMapping(value ="/save",method = RequestMethod.POST)
- public String saveRegistration(@Valid @ModelAttribute("escalations")Escalations escalations,HttpServletRequest request ,
-				BindingResult bindingResult, ModelMap model,RedirectAttributes redirectAttributes) {
+ public ModelAndView saveRegistration(@Valid @ModelAttribute("escalations")Escalations escalations,
+				BindingResult bindingResult, ModelMap model,RedirectAttributes redirectAttributes, HttpSession session ,HttpServletRequest request  ) {
+	  
+	  if (bindingResult.hasErrors()) {
+			//return "escalationReg";//will redirect to viewemp request mapping 
+		    User user1 = (User) session.getAttribute("USER_DETAILS");
+		    List<Status> statuslist= statusService.getStatusList();
+			List<Category> categoryList = categoryDAO.getCategoryList();
+			List<Projectscope> projectscopelist = projectscopeDAO.getProjectscopeList();
+			List<Responsible> responsiblelist = responsibleDAO.getResponsibleList();
+			model.addAttribute("user",user1);
+			model.addAttribute("statuslist",statuslist);
+			model.addAttribute("categoryList" ,categoryList);
+			model.addAttribute("projectscopelist",projectscopelist);
+			model.addAttribute("responsiblelist", responsiblelist);
+			model.addAttribute("escalations", escalations);
+			return new ModelAndView("escalationform"); 
+	  }
+	  
     User userSession=(User)request.getSession().getAttribute("USER_DETAILS");
     System.out.println(">>>>>>>>"+ userSession.getUserid());
 	escalationService.save(escalations ,userSession );		
     //redirectAttributes.addFlashAttribute("message", "Student " + escalations.getSiteid()+" "+ escalations.getId() + " saved");
 	//return "redirect:/viewescalationdetails/"+userSession.getUserid();//will redirect to viewemp request mapping 
-	return "escalationsaved";
+	return new ModelAndView("escalationsaved");
 		}
   
   
@@ -79,7 +96,7 @@ public String getHomePage(ModelMap model) {
 		return "index";
 	}
   
-  @RequestMapping(value ="/login",method = RequestMethod.POST)
+ @RequestMapping(value ="/login",method = RequestMethod.POST)
  public String login(@Valid @ModelAttribute("user") LoginForm user, 
 				BindingResult bindingResult, ModelMap model,RedirectAttributes redirectAttributes , HttpServletRequest request) {
     

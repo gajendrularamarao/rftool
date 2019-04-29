@@ -31,7 +31,6 @@ JdbcTemplate template;
 				"ro_region,\n" + 
 				"project_scope,\n" + 
 				"startdate,\n" + 
-				"enddate,\n" + 
 				"status,\n" + 
 				"originator_mail,\n" + 
 				"responsible,\n" + 
@@ -42,7 +41,7 @@ JdbcTemplate template;
 				"lead_time_in_days,\n" + 
 				"userid) values('"+e.getSiteid()+"','"+e.getSitename()+"','"+e.getTechnology()+
 				"','"+e.getSite_status()+"','"+e.getRo_region()+"','"+e.getProject_scope()+
-				"','"+e.getStartdate()+"','"+e.getEnddate()+"','"+e.getStatus()+"','"+e.getOriginator_mail()+
+				"','"+e.getStartdate()+"','"+e.getStatus()+"','"+e.getOriginator_mail()+
 				"','"+e.getResponsible()+"','"+e.getCategory()+"','"+e.getProblem_description()+"','"+e.getRequested_action_history()+"','" +e.getMail_reference()+
 				"',"+e.getLead_time_in_days()+","+user.getUserid()+")";
 		System.out.println(sql);

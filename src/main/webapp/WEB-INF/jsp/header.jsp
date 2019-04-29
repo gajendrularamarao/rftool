@@ -4,6 +4,6 @@
 <img align="left" src="/images/images.png"/>
 </td>
 <td width=50%> <font size=6 color="white" > OX Escalation Tool </font>   </td>
-<td width=20%><font size=6  color="white" face="Sans Serif"> <b> NOKIA</b> </font></td>
+<td width=20%><img align="right" src="/images/nokialogo.jpeg" height="20" width="100"/></td>
 </tr>
 </table>

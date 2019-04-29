@@ -1,38 +1,65 @@
 package com.rf.rftool.model;
 
 import javax.persistence.Id;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class Escalations {
 	
-	@Id @NotNull
+	@Id 
 	private int id;
 	
 	@NotNull
-	@NotEmpty( message = "Please enter the site ID" )
+	@NotEmpty
 	private String siteid;
-     @NotNull
+	@NotNull
+	@NotEmpty
 	private String sitename;
-     @NotNull
+	@NotNull
+	@NotEmpty
 	private String technology;
+	@NotNull
+	@NotEmpty
 	private String site_status;
+	@NotNull
+	@NotEmpty
 	private String ro_region;
-	@NotEmpty( message = "please select the" )
+	@NotNull
+	@NotEmpty
 	private String project_scope;
+	
+	@DateTimeFormat(pattern="MM/dd/yyyy")
 	@NotEmpty
 	private String startdate;
+	
 	private String enddate;
+	@NotNull
 	@NotEmpty
 	private String status;
+	@NotNull
+	@NotEmpty
 	private String originator_mail;
+	@NotNull
 	@NotEmpty
 	private String responsible;
+	@NotNull
 	@NotEmpty
 	private String category;
+	@NotNull
+	@NotEmpty
 	private String problem_description;
+	@NotNull
+	@NotEmpty
 	private String requested_action_history;
+	
+	@Email
 	private String mail_reference;
+	
+	@NotNull
 	private int lead_time_in_days;
 	@NotNull
 	private int userid;
