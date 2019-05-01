@@ -82,10 +82,14 @@ public class HomeController {
 	  
     User userSession=(User)request.getSession().getAttribute("USER_DETAILS");
     System.out.println(">>>>>>>>"+ userSession.getUserid());
-	escalationService.save(escalations ,userSession );		
+    
+    Escalations  escalations1 = escalationService.save(escalations ,userSession );
+	List<Escalations> list= new ArrayList<Escalations>();;
+	 	list.add(escalations1);
     //redirectAttributes.addFlashAttribute("message", "Student " + escalations.getSiteid()+" "+ escalations.getId() + " saved");
 	//return "redirect:/viewescalationdetails/"+userSession.getUserid();//will redirect to viewemp request mapping 
-	return new ModelAndView("escalationsaved");
+	 	model.addAttribute("user",userSession);
+	 	return new ModelAndView("escalationsaved", "list",list);
 		}
   
   

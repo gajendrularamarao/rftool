@@ -1,10 +1,14 @@
 package com.rf.rftool.dao;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.stereotype.Service;
 
 import com.rf.rftool.dao.IEscalations;
@@ -22,7 +26,7 @@ JdbcTemplate template;
 		template = new JdbcTemplate(dataSource);
 	}
 	
-	public void save(Escalations e , User user){
+	public Escalations save(Escalations e , User user){
 			
 		String sql="insert into ssaescalation(siteid,\n" + 
 				"sitename,\n" + 
@@ -46,6 +50,36 @@ JdbcTemplate template;
 				"',"+e.getLead_time_in_days()+","+user.getUserid()+")";
 		System.out.println(sql);
 	     template.update(sql);  
+	     
+	     return template.query("SELECT * FROM ssaescalation WHERE id=(SELECT MAX(id) FROM ssaescalation);" ,new ResultSetExtractor<Escalations>(){  
+			    
+		     public Escalations extractData(ResultSet rs) throws SQLException,  
+		            DataAccessException {  
+		      
+		    	 Escalations escalations= new Escalations();
+		        while(rs.next()){  
+		       
+		         escalations.setSiteid(rs.getString(1));
+		         escalations.setSitename(rs.getString(2));
+		         escalations.setTechnology(rs.getString(3));
+		         escalations.setSite_status(rs.getString(4));
+		         escalations.setRo_region(rs.getString(5));
+		         escalations.setProject_scope(rs.getString(6));
+		         escalations.setStartdate(rs.getString(7));
+		         escalations.setEnddate(rs.getString(8));
+		         escalations.setStatus(rs.getString(9));
+		         escalations.setOriginator_mail(rs.getString(10));
+		         escalations.setResponsible(rs.getString(11));
+		         escalations.setCategory(rs.getString(12));
+		         escalations.setProblem_description(rs.getString(13));
+		         escalations.setRequested_action_history(rs.getString(14));
+		         escalations.setMail_reference(rs.getString(15));
+		         escalations.setLead_time_in_days(rs.getInt(16));
+		         escalations.setId(rs.getInt(18));
+		        }  
+		        return escalations;  
+		        }  
+		    });  
 		
 	}
 

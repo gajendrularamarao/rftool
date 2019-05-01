@@ -35,11 +35,7 @@
       <tr valign="top" height="100" >
       <td width="10%" align="left"> 
       
-      <table> 
-      <tr><td id="reg"><a href="#">Escalation DashBoard</a></td></tr>
-      <tr><td id="reg"><a href="#">Escalation POST     </a></div></td></tr>
-      <tr><td id="reg"><a href="#">get EscalationList </a></div> </td></tr>
-      </table>
+        <jsp:include page="escalationsidemenu.jsp"></jsp:include>
        </td>
       <td width="90%" align="center">  
        <font size="4" color="red" face="verdana" > Escalation Form </font>
@@ -67,7 +63,7 @@
 					    <form:select path="project_scope" id="project_scope">
                            <form:option value="NONE" label="--- Select ---"/>
                              <c:forEach var="item" items="${projectscopelist}">
-                         <form:option value="${item.projectscopeid}">${item.projectscopename}</form:option>
+                         <form:option value="${item.projectscopename}">${item.projectscopename}</form:option>
                         </c:forEach>
                        </form:select> <form:errors path="project_scope" cssClass="error" > </form:errors>
                   	 </td>
@@ -82,7 +78,7 @@
 					<td><form:select path="status" id="status">
                          <form:option value="NONE" label="--- Select ---"/>
                          <c:forEach var="item" items="${statuslist}">
-                         <form:option value="${item.statusid}">${item.statusname}</form:option>
+                         <form:option value="${item.statusname}">${item.statusname}</form:option>
                         </c:forEach>
                         
                         </form:select> <form:errors path="status" cssStyle="color: #ff0000; font-size: 10px;"> </form:errors> 
@@ -97,7 +93,7 @@
 					<form:select path="responsible" id="responsible" >
 					<form:option value="NONE" label="--- Select ---"/>
                          <c:forEach var="item" items="${responsiblelist}">
-                         <form:option value="${item.responsibleid}">${item.responsiblename}</form:option>
+                         <form:option value="${item.responsiblename}">${item.responsiblename}</form:option>
                         </c:forEach>
                         
                         </form:select>
@@ -109,7 +105,7 @@
 					<td><form:select path="category" id="category">
                          <form:option value="NONE" label="--- Select ---"/>
                          <c:forEach var="item" items="${categoryList}">
-                         <form:option value="${item.categoryid}">${item.categoryname}</form:option>
+                         <form:option value="${item.categoryname}">${item.categoryname}</form:option>
                         </c:forEach>
                         
                         </form:select>

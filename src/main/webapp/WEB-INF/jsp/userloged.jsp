@@ -21,7 +21,8 @@
   <table align="center" border="0" width="85%" >
    <tr id="header" ><td id="logo"><jsp:include page="header.jsp"></jsp:include> </td></tr>
   <tr id="menuheader">
-   <td><table border="0" width="100%" align="center">
+   <td>
+   <table border="0" width="100%" align="center">
     <tr><td width="50%" align="right" ><div class="topnav"><a href="${contextPath}/">Home</a>
           <a href="#">Escalation</a></div></td>
          <td width="20%" align="left">Welcome.. <font font="2" color=red> ${user.username} </font> </td>                       
@@ -35,11 +36,9 @@
       <tr valign="top" height="100" >
       <td width="10%" align="left"> 
       
-      <table> 
-      <tr><td id="reg"><a href="#">Escalation DashBoard</a></td></tr>
-      <tr><td id="reg"><a href="${contextPath}/escalationform">Escalation POST</a></div></td></tr>
-      <tr><td id="reg"><a href="#">get EscalationList </a></div> </td></tr>
-      </table>
+        <jsp:include page="escalationsidemenu.jsp"></jsp:include>
+        
+   
        </td>
       <td width="90%" align="center">  
      

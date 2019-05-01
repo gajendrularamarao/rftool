@@ -7,6 +7,6 @@ import com.rf.rftool.model.User;
 
 public interface IEscalations {
 
-	public void save(Escalations e , User user);
+	public Escalations save(Escalations e , User user);
 	public List<Escalations> getAllEscalations();
 }

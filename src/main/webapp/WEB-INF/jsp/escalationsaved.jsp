@@ -35,15 +35,43 @@
       <tr valign="top" height="100" >
       <td width="10%" align="left"> 
       
-      <table> 
-      <tr><td id="reg"><a href="#">Escalation DashBoard</a></td></tr>
-      <tr><td id="reg"><a href="#">Escalation POST     </a></div></td></tr>
-      <tr><td id="reg"><a href="#">get EscalationList </a></div> </td></tr>
-      </table>
+      <jsp:include page="escalationsidemenu.jsp"></jsp:include>
+      
        </td>
       <td width="90%" align="center">  
+          
      
-      <H1> Escalation Save............</H1>
+       <table width="100%" border="1" align="center" height="100">
+            <tr><td align="center">  <h2>You have successfully Rise Escalation and Details...</h2> </td></tr>
+            <c:forEach var="User" items="${list}"> 
+            <tr><td>
+            <table width="90%" border="1" align="center" height="100">
+            <tr><td id="regdisplay">Escalation Reference No</td> <td> ${User.id}</td> </tr>
+            <tr><td id="regdisplay" > Site ID </td> <td>  ${User.siteid}</td>  </tr>
+            <tr><td id="regdisplay"> Site Name </td> <td> ${User.sitename}</td>  </tr>
+            <tr><td id="regdisplay">Technology  </td> <td>  ${User.technology}</td></tr>
+            <tr><td id="regdisplay">Site Status  </td> <td> ${User.site_status}</td> </tr>
+            
+             <tr><td id="regdisplay" > RO Region </td> <td> ${User.ro_region}</td>  </tr>
+            <tr><td id="regdisplay"> Project Scope </td> <td> ${User.project_scope}</td>  </tr>
+            <tr><td id="regdisplay"> Start Date  </td> <td>  ${User.startdate}</td></tr>
+            <tr><td id="regdisplay">Status  </td> <td> ${User.status}</td> </tr>
+            
+             <tr><td id="regdisplay" > Originator Mail </td> <td>  ${User.originator_mail}</td>  </tr>
+            <tr><td id="regdisplay"> Responsible  </td> <td> ${User.responsible}</td>  </tr>
+            <tr><td id="regdisplay">Category </td> <td> ${User.category}</td></tr>
+            <tr><td id="regdisplay">Designation </td> <td> ${User.problem_description}</td> </tr>
+            
+            <tr><td id="regdisplay" > Requested Action History </td> <td>  ${User.requested_action_history}</td>  </tr>
+            <tr><td id="regdisplay"> Mail Reference </td> <td> ${User.mail_reference}</td>  </tr>
+            <tr><td id="regdisplay"> Lead Time in Days </td> <td> ${User.lead_time_in_days}</td></tr>
+            
+            </table> </td></tr>
+            
+            <tr>  <td id="reg">if you want change any data please : <a href="#">Edit</a></td> </tr>
+            
+            </c:forEach>
+            </table>  
       
       
      </td>

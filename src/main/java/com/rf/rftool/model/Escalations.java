@@ -42,6 +42,7 @@ public class Escalations {
 	private String status;
 	@NotNull
 	@NotEmpty
+	@Email
 	private String originator_mail;
 	@NotNull
 	@NotEmpty
@@ -55,7 +56,7 @@ public class Escalations {
 	@NotNull
 	@NotEmpty
 	private String requested_action_history;
-	
+	@NotEmpty
 	@Email
 	private String mail_reference;
 	
