@@ -33,16 +33,16 @@
      <td>
       <table width="100%"  border="2" align="center" height="450">
       <tr valign="top" height="100" >
-      <td width="10%" align="left"> 
+      <td width="15%" align="left"> 
       
         <jsp:include page="escalationsidemenu.jsp"></jsp:include>
        </td>
-      <td width="90%" align="center">  
+      <td width="85%" align="center">  
        <font size="4" color="red" face="verdana" > Escalation Form </font>
       <form:form method="POST" modelAttribute="escalations" action="save">
 	 
 	  <table align=center border="1" style="width:70%">
-	            <tr> <c:out value="${error.siteid}"></c:out>  </tr>
+	           
 				<tr>
 					<td>site ID</td>
 					<td> <form:input type="text" path="siteid" id="siteid" /> <form:errors path="siteid" cssStyle="color: #ff0000; font-size: 10px;"> </form:errors> </td>

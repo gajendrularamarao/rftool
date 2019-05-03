@@ -170,9 +170,19 @@ public String getHomePage(ModelMap model) {
   } 
  		
     
+
+  @RequestMapping(value="/escalationserach", method = RequestMethod.GET)
+  public String escalationserach(ModelMap model , HttpSession session) {
+	  Escalations escalations = new Escalations();
+	  User user1 = (User) session.getAttribute("USER_DETAILS");
+	  List<Status> statuslist= statusService.getStatusList();
+	  model.addAttribute("user",user1);
+	  model.addAttribute("escalations", escalations);
+	  model.addAttribute("statuslist",statuslist);
+	  return "escalationsearch";
+  }
+
   
-
-
 @RequestMapping(value="/escalationform", method = RequestMethod.GET)
 public String getescalationform(ModelMap model , HttpSession session) {
 	Escalations escalations = new Escalations();

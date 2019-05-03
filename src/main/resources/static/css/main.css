@@ -42,3 +42,27 @@ a {
     font-weight: bold;
     color:blue;
 }
+
+.vertical-menu {
+  width: 200px;
+  height: 1500px;
+  overflow-y: auto;
+}
+
+.vertical-menu a {
+  background-color: #eee;
+  color: black;
+  display: block;
+  padding: 5px;
+  text-decoration: none;
+}
+
+.vertical-menu a:hover {
+  background-color: #ccc;
+}
+
+.vertical-menu a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
