@@ -100,26 +100,40 @@ public String getHomePage(ModelMap model) {
 		return "index";
 	}
   
- @RequestMapping(value ="/login",method = RequestMethod.POST)
- public String login(@Valid @ModelAttribute("user") LoginForm user, 
+ @SuppressWarnings("unused")
+@RequestMapping(value ="/login",method = RequestMethod.POST)
+ public ModelAndView login(@Valid @ModelAttribute("user") LoginForm user, 
 				BindingResult bindingResult, ModelMap model,RedirectAttributes redirectAttributes , HttpServletRequest request) {
     
 	  if (bindingResult.hasErrors()) {
 		  System.out.println("is having errors>>>>>>>>>>>>>>>>");
-	      return "index";
+		  return new ModelAndView("index");
 	    }
 	 User loginuser = new User();
 	 loginuser.setMailid(user.getMailid());
 	 loginuser.setUserpass(user.getUserpass());
-	 User user1 = userService.getUser(loginuser);		
+	 //User user1 = userService.getUser(loginuser);		
     // redirectAttributes.addFlashAttribute("message", "Student " + user.getUserid()+" "+ user.getUsername() + "login...");
 	//return "redirect:/viewstudents/1";//will redirect to viewemp request mapping 
-     System.out.println(user1.getUserid());
-     System.out.println(user1.getUsername());
+     //System.out.println(user1.getUserid());
+     //System.out.println(user1.getUsername());
+     String tocheckuser="Please Check User ID And Password";
+     if(userService.getUser(loginuser)==null)
+     {
+    	 model.addAttribute("tocheckuser" ,tocheckuser);
+    	 return new ModelAndView("index");
+     }
+     else {	 
+    User user1 = userService.getUser(loginuser);	
+    System.out.println(user1.getUserid());
+    System.out.println(user1.getUsername());
     request.getSession().setAttribute("USER_DETAILS",user1);
     model.addAttribute("user", user1);
-	return "userloged";
+    return new ModelAndView("userloged");
+    
+	
 		}
+    }
   @RequestMapping(value="/registration", method = RequestMethod.GET)
   public String getRegistration(ModelMap model) {
   	   User user = new User();

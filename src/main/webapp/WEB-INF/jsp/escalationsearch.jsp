@@ -16,8 +16,53 @@
 	<link href="${contextPath}/css/custom.css"      rel="stylesheet">
 	<link href="${contextPath}/css/main.css"      rel="stylesheet">
 	
+	
+	
 </head>
 <body>
+   
+
+<script>
+            function myFunction()
+               {
+
+                var tocheck = document.getElementById("id").value;
+
+                var siteid = document.getElementById("siteid").value;
+                
+                var dis = tocheck.style;
+                console.log(tocheck);
+                console.log(siteid);
+                 if(siteid!=="")
+                     {
+                	 document.getElementById("id").disabled = true;
+                     }
+                 else
+                     {
+                	 document.getElementById("id").disabled = false;
+                     }
+                
+                if (tocheck>0)
+                {
+                	document.getElementById("siteid").disabled = true;
+                	document.getElementById("sitename").disabled = true;
+                	document.getElementById("startdate").disabled = true;
+                	document.getElementById("enddate").disabled = true;
+                	document.getElementById("status").disabled = true;
+                }
+                else
+                {
+                	document.getElementById("siteid").disabled = false;
+                	document.getElementById("sitename").disabled = false;
+                	document.getElementById("startdate").disabled = false;
+                	document.getElementById("enddate").disabled = false;
+                	document.getElementById("status").disabled = false;
+                }
+                 }
+
+	</script>
+
+
   <table align="center" border="0" width="85%" >
    <tr id="header" ><td id="logo"><jsp:include page="header.jsp"></jsp:include> </td></tr>
   <tr id="menuheader">
@@ -46,10 +91,10 @@
 	           
 	           <tr>
 					<td>Escalation Reference Number </td>
-					<td><form:input type="text" path="id" id="id" /> <form:errors path="id" cssStyle="color: #ff0000; font-size: 10px;"> </form:errors>  </td> </tr>
+					<td><form:input type="text" path="id" id="id" onchange="myFunction()"/> <form:errors path="id" cssStyle="color: #ff0000; font-size: 10px;"> </form:errors>  </td> </tr>
 				<tr>
 					<td>site ID</td>
-					<td> <form:input type="text" path="siteid" id="siteid" /> <form:errors path="siteid" cssStyle="color: #ff0000; font-size: 10px;"> </form:errors> </td> </tr>
+					<td> <form:input type="text" path="siteid" id="siteid" onchange="myFunction()"/> <form:errors path="siteid" cssStyle="color: #ff0000; font-size: 10px;"> </form:errors> </td> </tr>
 				<tr>	<td>site Name</td>
 					<td> <form:input type="text" path="sitename" id="sitename" /> <form:errors path="sitename" cssStyle="color: #ff0000; font-size: 10px;"> </form:errors>  </td>
 				</tr>
@@ -57,7 +102,7 @@
 				<tr>	<td>Start Date</td>
 					<td> <form:input type="date" path="startdate" id="startdate" /> <form:errors path="startdate" cssStyle="color: #ff0000; font-size: 10px;"> </form:errors>  </td>
 				</tr>
-				<tr>	<td>Start Date</td>
+				<tr>	<td>End Date</td>
 					<td> <form:input type="date" path="enddate" id="enddate" /> <form:errors path="enddate" cssStyle="color: #ff0000; font-size: 10px;"> </form:errors>  </td>
 				</tr>
 				<tr>	<td>Status</td>

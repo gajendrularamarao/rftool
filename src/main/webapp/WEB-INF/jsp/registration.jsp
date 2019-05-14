@@ -35,7 +35,8 @@
   <tr id="menuheader">
    <td><table border="0" width="100%" align="center">
     <tr><td width="50%" align="right" ><div class="topnav"><a href="/">Home</a>
-         <td width="20%" align="left">Welcome.. </td>                       
+         <td width="20%" align="left"> Welcome.. </td>  
+                               
         </tr>
       </table>
     </td>

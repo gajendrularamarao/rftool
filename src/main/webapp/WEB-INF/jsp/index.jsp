@@ -46,7 +46,7 @@
      
           <form:form method="POST" modelAttribute="user" action="login">
           <table width="50%	" border="1" align="center" height="150">
-            <tr > <td>  <h2>Log in</h2>   </td></tr>
+            <tr > <td>  <h2>Log in</h2> <font size="2"  face="arial,helvetica" color="red">${tocheckuser} </font>   </td></tr>
             <tr><td><form:input path="mailid" type="text" placeholder="Enter Mail ID"  name="mailid"/>
                      <form:errors path="mailid" cssStyle="color: #ff0000; font-size: 10px;"> </form:errors>
               </td></tr>

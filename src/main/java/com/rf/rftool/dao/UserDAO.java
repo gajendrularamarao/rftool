@@ -101,7 +101,7 @@ public class UserDAO implements IUser {
 	public User getUser(User p) {
 		
 		System.out.print("enter user logn Query");
-		return template.query("select * from user_details where user_mailid = '"+p.getMailid()+"'" ,new ResultSetExtractor<User>(){  
+		return template.query("select * from user_details where user_mailid = '"+p.getMailid()+"' and user_pass = '"+p.getUserpass()+"'" ,new ResultSetExtractor<User>(){  
 		    
 		     public User extractData(ResultSet rs) throws SQLException,  
 		            DataAccessException {  
@@ -115,7 +115,11 @@ public class UserDAO implements IUser {
 		        user.setMailid(rs.getString(4));
 		        user.setUserpass(rs.getString(5));
 		        }  
-		        return user;  
+		        if((user.getMailid()==null)||(user.getUserpass()==null)) {
+		        return user=null;  
+		        }
+		        else { return user;  }
+		        
 		        }  
 		    });
 		
