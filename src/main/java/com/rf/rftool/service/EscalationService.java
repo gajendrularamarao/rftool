@@ -21,9 +21,9 @@ public class EscalationService implements IEscalationservice {
 	}
 
 	@Override
-	public List<User> getAllEscalations() {
+	public List<Escalations> getAllEscalations(User user1) {
 		// TODO Auto-generated method stub
-		return null;
+		return escalationsDAO.getAllEscalations(user1);
 	}
 	
 

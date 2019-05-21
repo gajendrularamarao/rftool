@@ -1,6 +1,7 @@
 package com.rf.rftool.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -10,6 +11,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.stereotype.Service;
+
 
 import com.rf.rftool.dao.IEscalations;
 import com.rf.rftool.model.Escalations;
@@ -84,12 +86,46 @@ JdbcTemplate template;
 	}
 
 	@Override
-	public List<Escalations> getAllEscalations() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Escalations> getAllEscalations(User user) {
+		
+		return template.query("select * from ssaescalation where userid="+user.getUserid()+";",new ResultSetExtractor<List<Escalations>>(){  
+		    
+		     public List<Escalations> extractData(ResultSet rs) throws SQLException,  
+		            DataAccessException {  
+		      
+		        List<Escalations> list=new ArrayList<Escalations>();  
+		        while(rs.next()){  
+		        Escalations e=new Escalations();  
+		        e.setSiteid(rs.getString(1));
+		        e.setSitename(rs.getString(2));
+		        e.setTechnology(rs.getString(3));
+		        e.setSite_status(rs.getString(4));
+		        e.setRo_region(rs.getString(5));
+		        e.setProject_scope(rs.getString(6));
+		        e.setStartdate(rs.getString(7));
+		        e.setEnddate(rs.getString(8));
+		        e.setStatus(rs.getString(9));
+		        e.setOriginator_mail(rs.getString(10));
+		        e.setResponsible(rs.getString(11));
+		        e.setCategory(rs.getString(12));
+		        e.setProblem_description(rs.getString(13));
+		        e.setRequested_action_history(rs.getString(14));
+		        e.setMail_reference(rs.getString(15));
+		        e.setLead_time_in_days(rs.getInt(16));
+		        e.setUserid(rs.getInt(18));
+		        
+		        
+		        
+		        
+		        
+		        list.add(e);  
+		        }  
+		        return list;  
+		        }  
+		    });  
 	}
 	
-	
+
 	
 	
 

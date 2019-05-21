@@ -8,5 +8,5 @@ import com.rf.rftool.model.User;
 public interface IEscalations {
 
 	public Escalations save(Escalations e , User user);
-	public List<Escalations> getAllEscalations();
+	public List<Escalations> getAllEscalations(User user);
 }

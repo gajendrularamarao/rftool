@@ -236,7 +236,15 @@ public String viewescalationdetails(@RequestParam int userid ) {
 	}
 
 
-
+@RequestMapping(value="/search", method = RequestMethod.POST)
+public String getescalationsearch(ModelMap model , HttpSession session) {
+	List<Escalations> escalations;
+	User user1 = (User) session.getAttribute("USER_DETAILS");
+	model.addAttribute("user",user1);
+	escalations = escalationService.getAllEscalations(user1);
+	model.addAttribute("escalations",escalations);
+	return "escalationsearchdetails";
+	}
 }
 
 
