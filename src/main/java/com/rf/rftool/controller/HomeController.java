@@ -4,20 +4,24 @@ import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -190,9 +194,11 @@ public String getHomePage(ModelMap model) {
 	  Escalations escalations = new Escalations();
 	  User user1 = (User) session.getAttribute("USER_DETAILS");
 	  List<Status> statuslist= statusService.getStatusList();
+	  List<Integer> listids = escalationService.getEscalationIds(user1);
 	  model.addAttribute("user",user1);
 	  model.addAttribute("escalations", escalations);
 	  model.addAttribute("statuslist",statuslist);
+	  model.addAttribute("listids",listids);
 	  return "escalationsearch";
   }
 
@@ -236,14 +242,47 @@ public String viewescalationdetails(@RequestParam int userid ) {
 	}
 
 
-@RequestMapping(value="/search", method = RequestMethod.POST)
-public String getescalationsearch(ModelMap model , HttpSession session) {
+@RequestMapping(value="/search", method = RequestMethod.GET)
+public String getescalationsearch(ModelMap model  ,@RequestParam("id") int id, @RequestParam("siteid") String siteid ,
+		@RequestParam("sitename") String sitename , @RequestParam("startdate") String startdate , @RequestParam("enddate") String enddate , 
+		@RequestParam("status") String status ,HttpSession session) {
+	
+	System.out.println("the ID is >>>>"+id);
 	List<Escalations> escalations;
 	User user1 = (User) session.getAttribute("USER_DETAILS");
 	model.addAttribute("user",user1);
-	escalations = escalationService.getAllEscalations(user1);
-	model.addAttribute("escalations",escalations);
+	
+	if(id>0)
+	{
+		escalations = escalationService.getEscalationById(user1, id);
+		model.addAttribute("escalations",escalations);
+		System.out.println("ID>>>>"+id);
+		
+	}else {
+		
+		if( siteid!="" || sitename!="" || startdate!="" || enddate!="" || status!="" )
+	     {
+		
+			System.out.println("ALL Files enter>>>>>>");
+			escalations = escalationService.getEscalationBySerach(user1, siteid, sitename, startdate, enddate, status);
+			model.addAttribute("escalations",escalations);
+		
+		System.out.println("siteid>>>>"+siteid);
+		System.out.println("sitename>>>"+sitename);
+		System.out.println("startdate>>>>"+startdate);
+		System.out.println("enddate>>>>"+enddate);
+		System.out.println("status>>>>"+status);
+		
+	      }else {
+	    	  System.out.println("kkkkkk");
+	    	  escalations = escalationService.getAllEscalations(user1);
+	    		model.addAttribute("escalations",escalations);
+	    		System.out.println("all feilds are Not nulll>>>>"+id);
+	    		
+	        }
+	}
 	return "escalationsearchdetails";
+	
 	}
 }
 

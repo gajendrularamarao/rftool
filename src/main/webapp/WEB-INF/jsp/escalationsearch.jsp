@@ -26,37 +26,37 @@
                {
 
                 var tocheck = document.getElementById("id").value;
-
                 var siteid = document.getElementById("siteid").value;
+                var sitename = document.getElementById("sitename").value;	
+            	var startdate = document.getElementById("startdate").value;
+            	var enddate = document.getElementById("enddate").value;
+            	var status = document.getElementById("status").value;
                 
                 var dis = tocheck.style;
                 console.log(tocheck);
                 console.log(siteid);
-                 if(siteid!=="")
+                console.log(sitename);
+                console.log(startdate);
+                console.log(enddate);
+                console.log(status);
+
+                 if(siteid!=="" || sitename!=="" || startdate!=="" || enddate!=="" || status!=="" )
                      {
-                	 document.getElementById("id").disabled = true;
+                	 document.getElementById("id").value=0;
+                	 
                      }
-                 else
-                     {
-                	 document.getElementById("id").disabled = false;
-                     }
+                
                 
                 if (tocheck>0)
                 {
-                	document.getElementById("siteid").disabled = true;
-                	document.getElementById("sitename").disabled = true;
-                	document.getElementById("startdate").disabled = true;
-                	document.getElementById("enddate").disabled = true;
-                	document.getElementById("status").disabled = true;
+                	document.getElementById("siteid").value="";
+                	document.getElementById("sitename").value="";
+                	document.getElementById("startdate").value="";
+                	document.getElementById("enddate").value="";
+                	document.getElementById("status").value="";
+                	
                 }
-                else
-                {
-                	document.getElementById("siteid").disabled = false;
-                	document.getElementById("sitename").disabled = false;
-                	document.getElementById("startdate").disabled = false;
-                	document.getElementById("enddate").disabled = false;
-                	document.getElementById("status").disabled = false;
-                }
+                
                  }
 
 	</script>
@@ -84,29 +84,38 @@
        </td>
       <td width="90%" align="center">  
            <font size="4" color="red" face="verdana" > Escalation Search </font>
-        <form:form method="POST" modelAttribute="escalations" action="search">
+        <form:form method="GET" modelAttribute="escalations" action="search">
         
         <table align=center border="1" style="width:50%">
 	           
 	           <tr>
 					<td>Escalation Reference Number </td>
-					<td><form:input type="text" path="id" id="id" onchange="myFunction()"/> <form:errors path="id" cssStyle="color: #ff0000; font-size: 10px;"> </form:errors>  </td> </tr>
+					
+					<td><form:select path="id" id="id" onchange="myFunction()">
+                         <form:option value="0" label="--- Select ---"/>
+                         <c:forEach var="item" items="${listids}">
+                         <form:option value="${item}">${item}</form:option>
+                        </c:forEach>
+                        
+                        </form:select> <form:errors path="status" cssStyle="color: #ff0000; font-size: 10px;"> </form:errors> 
+					</td>
+					 </tr>
 				<tr>
 					<td>site ID</td>
 					<td> <form:input type="text" path="siteid" id="siteid" onchange="myFunction()"/> <form:errors path="siteid" cssStyle="color: #ff0000; font-size: 10px;"> </form:errors> </td> </tr>
 				<tr>	<td>site Name</td>
-					<td> <form:input type="text" path="sitename" id="sitename" /> <form:errors path="sitename" cssStyle="color: #ff0000; font-size: 10px;"> </form:errors>  </td>
+					<td> <form:input type="text" path="sitename" id="sitename" onchange="myFunction()" /> <form:errors path="sitename" cssStyle="color: #ff0000; font-size: 10px;"> </form:errors>  </td>
 				</tr>
 				
 				<tr>	<td>Start Date</td>
-					<td> <form:input type="date" path="startdate" id="startdate" /> <form:errors path="startdate" cssStyle="color: #ff0000; font-size: 10px;"> </form:errors>  </td>
+					<td> <form:input type="date" path="startdate" id="startdate" onchange="myFunction()" /> <form:errors path="startdate" cssStyle="color: #ff0000; font-size: 10px;"> </form:errors>  </td>
 				</tr>
 				<tr>	<td>End Date</td>
-					<td> <form:input type="date" path="enddate" id="enddate" /> <form:errors path="enddate" cssStyle="color: #ff0000; font-size: 10px;"> </form:errors>  </td>
+					<td> <form:input type="date" path="enddate" id="enddate" onchange="myFunction()"/> <form:errors path="enddate" cssStyle="color: #ff0000; font-size: 10px;"> </form:errors>  </td>
 				</tr>
 				<tr>	<td>Status</td>
-					<td><form:select path="status" id="status">
-                         <form:option value="NONE" label="--- Select ---"/>
+					<td><form:select path="status" id="status" onchange="myFunction()">
+                         <form:option value="" label="--- Select ---"/>
                          <c:forEach var="item" items="${statuslist}">
                          <form:option value="${item.statusname}">${item.statusname}</form:option>
                         </c:forEach>

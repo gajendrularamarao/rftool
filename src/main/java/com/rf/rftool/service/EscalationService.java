@@ -25,6 +25,25 @@ public class EscalationService implements IEscalationservice {
 		// TODO Auto-generated method stub
 		return escalationsDAO.getAllEscalations(user1);
 	}
+
+	@Override
+	public List<Escalations> getEscalationById(User user, int id) {
+		
+		return escalationsDAO.getEscalationsById(user, id);
+		
+	}
+
+	@Override
+	public List<Integer> getEscalationIds(User user) {
+		return escalationsDAO.getEscalationIds(user);
+	}
+
+	@Override
+	public List<Escalations> getEscalationBySerach(User user, String siteid, String sitename, String startdate,
+			String enddate, String status) {
+		
+		return escalationsDAO.getEscalationBySerach(user, siteid, sitename, startdate, enddate, status);
+	}
 	
 
 }

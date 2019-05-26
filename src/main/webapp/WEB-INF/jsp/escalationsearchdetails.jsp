@@ -13,9 +13,13 @@
 	<title>OX Escalation Tool </title>
 	<link href="${contextPath}/css/bootstrap.css"      rel="stylesheet">
 	<link href="${contextPath}/css/custom.css"      rel="stylesheet">
-	<link href="${contextPath}/css/main.css"      rel="stylesheet">
-	
-	
+<style>
+#tabledis{
+ font-size:12px;
+ color:#053E75;	
+ text-decoration:none;
+}
+</style>	
 	
 </head>
 <body>
@@ -84,9 +88,10 @@
        </td>
       <td width="90%" align="center">  
            <font size="4" color="red" face="verdana" > Escalation Search </font>
-        <form:form  class="form-horizontal" >
-<table id="t01" border="2" width="70%" cellpadding="2">
-<tr><th>Site ID</th><th>Site Name</th><th>Technology Name</th>
+       
+       
+<table id="tabledis"  border="1" style="width:100%" cellpadding="0">
+<tr ><th>Site ID</th><th>Site Name</th><th>Technology Name</th>
 <th>Site Status</th><th>RO Region</th>
 <th>Project Scope</th><th>Start Date</th><th>End Date</th>
 <th>Status </th><th>Originator Mail</th>
@@ -94,7 +99,7 @@
 <th>Problem Description</th><th>Request Action history</th>
 <th>Mail Refereance</th><th>Lead Time</th>
 <th>User ID</th>
-</tr>  
+</tr>  	
 
    <c:forEach var="esc" items="${escalations}"> 
    <tr>  
@@ -124,11 +129,7 @@
    
    
    </table>  
-   <br/>
    
-  
-   </form:form>
-        
        </td>
        
       </tr>

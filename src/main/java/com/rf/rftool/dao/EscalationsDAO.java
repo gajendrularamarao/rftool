@@ -1,6 +1,8 @@
 package com.rf.rftool.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -111,7 +113,18 @@ JdbcTemplate template;
 		        e.setProblem_description(rs.getString(13));
 		        e.setRequested_action_history(rs.getString(14));
 		        e.setMail_reference(rs.getString(15));
-		        e.setLead_time_in_days(rs.getInt(16));
+		        
+		        if(rs.getString(8)==null) {
+		        	System.out.println("......No of Days >>>>>>>>+NULL");
+		        e.setLead_time_in_days(getDateDifferences(rs.getString(7)));
+		        }
+		        else
+		        {
+		        e.setLead_time_in_days(getDateDifferences(rs.getString(7), rs.getString(8) ));
+		        }
+		        
+		        
+		        
 		        e.setUserid(rs.getInt(18));
 		        
 		        
@@ -125,8 +138,460 @@ JdbcTemplate template;
 		    });  
 	}
 	
-
-	
 	
 
+	@Override
+	public List<Escalations> getEscalationsById(User user,int id) {
+		
+		String sql ="select * from ssaescalation where userid="+user.getUserid()+" and id="+id+";";
+		System.out.println(sql);
+		
+		return template.query("select * from ssaescalation where userid="+user.getUserid()+" and id="+id+";",new ResultSetExtractor<List<Escalations>>(){  
+		    
+		     public List<Escalations> extractData(ResultSet rs) throws SQLException,  
+		            DataAccessException {  
+		      
+		        List<Escalations> list=new ArrayList<Escalations>();  
+		        while(rs.next()){  
+		        Escalations e=new Escalations();  
+		        e.setSiteid(rs.getString(1));
+		        e.setSitename(rs.getString(2));
+		        e.setTechnology(rs.getString(3));
+		        e.setSite_status(rs.getString(4));
+		        e.setRo_region(rs.getString(5));
+		        e.setProject_scope(rs.getString(6));
+		        e.setStartdate(rs.getString(7));
+		        e.setEnddate(rs.getString(8));
+		        e.setStatus(rs.getString(9));
+		        e.setOriginator_mail(rs.getString(10));
+		        e.setResponsible(rs.getString(11));
+		        e.setCategory(rs.getString(12));
+		        e.setProblem_description(rs.getString(13));
+		        e.setRequested_action_history(rs.getString(14));
+		        e.setMail_reference(rs.getString(15));
+		        
+		        if(rs.getString(8)==null) {
+		        	System.out.println("......No of Days >>>>>>>>+NULL");
+		        e.setLead_time_in_days(getDateDifferences(rs.getString(7)));
+		        }
+		        else
+		        {
+		        e.setLead_time_in_days(getDateDifferences(rs.getString(7), rs.getString(8) ));
+		        }
+		        e.setUserid(rs.getInt(18));
+		        
+		        
+		        
+		        
+		        
+		        list.add(e);  
+		        }  
+		        return list;  
+		        }  
+		    });  
+	}
+
+	@Override
+	public List<Integer> getEscalationIds(User user) {
+		
+		String sql ="select * from ssaescalation where userid="+user.getUserid()+";";
+		System.out.println(sql);
+		
+		return template.query("select id from ssaescalation where userid="+user.getUserid()+";",new ResultSetExtractor<List<Integer>>(){  
+		    
+		     public List<Integer> extractData(ResultSet rs) throws SQLException,  
+		            DataAccessException {  
+		        List<Integer> list=new ArrayList<Integer>();  
+		        while(rs.next()){  
+                  list.add(rs.getInt(1));
+		        }  
+		        return list;  
+		        }  
+		    });
+		
+		
+	}
+	
+	 public int getDateDifferences(String startdate )
+	   {
+		   
+		 LocalDate currentdate = LocalDate.now();
+		 System.out.println("......No of Days >>>>>>>>   NULLL"+currentdate.now().toString());
+		 LocalDate Startdate = LocalDate.parse(startdate);
+		 long noOfDaysBetween = ChronoUnit.DAYS.between(Startdate ,currentdate );
+		 System.out.println("......No of Days >>>>>>>>   NULLL"+noOfDaysBetween);
+		 return (int)noOfDaysBetween;
+	   }
+	
+   public int getDateDifferences(String startdate , String enddate)
+   {
+	   
+	   LocalDate Startdate = LocalDate.parse(startdate);
+	   LocalDate Enddate = LocalDate.parse(enddate);
+	   long noOfDaysBetween = ChronoUnit.DAYS.between(Startdate ,Enddate );
+	   System.out.println("......No of Days >>>>>>>>"+noOfDaysBetween);
+	   return (int)noOfDaysBetween;
+   }
+
+@Override
+public List<Escalations> getEscalationBySerach(User user, String siteid, String sitename, String startdate,
+		String enddate, String status) {
+	
+	 List<Escalations> list=new ArrayList<Escalations>();
+	 
+	    if(siteid!="" && enddate!="" && startdate!="" && status!="" ) 
+	    {
+	    	String sql = "select * from ssaescalation where userid="+user.getUserid()+" and siteid = '"+siteid+"' and  startdate between '"+startdate+"' and '"+enddate+"' and  status='"+status+"';";
+	        System.out.println(sql);	
+	        list = template.query("select * from ssaescalation where userid="+user.getUserid()+" and siteid ='"+siteid+"' and  startdate between '"+startdate+"' and '"+ enddate +"' and  status='"+status+"' ;",new ResultSetExtractor<List<Escalations>>(){  
+	        	List<Escalations> list1=new ArrayList<Escalations>(); 
+			     public List<Escalations> extractData(ResultSet rs) throws SQLException,  
+			            DataAccessException {  
+			      
+			         
+			        while(rs.next()){  
+			        Escalations e=new Escalations();  
+			        e.setSiteid(rs.getString(1));
+			        e.setSitename(rs.getString(2));
+			        e.setTechnology(rs.getString(3));
+			        e.setSite_status(rs.getString(4));
+			        e.setRo_region(rs.getString(5));
+			        e.setProject_scope(rs.getString(6));
+			        e.setStartdate(rs.getString(7));
+			        e.setEnddate(rs.getString(8));
+			        e.setStatus(rs.getString(9));
+			        e.setOriginator_mail(rs.getString(10));
+			        e.setResponsible(rs.getString(11));
+			        e.setCategory(rs.getString(12));
+			        e.setProblem_description(rs.getString(13));
+			        e.setRequested_action_history(rs.getString(14));
+			        e.setMail_reference(rs.getString(15));
+			        
+			        if(rs.getString(8)==null) {
+			        	System.out.println("......No of Days >>>>>>>>+NULL");
+			        e.setLead_time_in_days(getDateDifferences(rs.getString(7)));
+			        }
+			        else
+			        {
+			        e.setLead_time_in_days(getDateDifferences(rs.getString(7), rs.getString(8) ));
+			        }
+			        e.setUserid(rs.getInt(18));
+			        
+			        
+			        
+			        
+			        
+			        list1.add(e);  
+			        }  
+			        System.out.print("RECORD Size>>>>>>>"+list1.size());
+			        return list1;  
+			        }  
+			    });  
+	    	
+	    
+	    }
+	
+	    if(sitename!="" && enddate!="" && startdate!="" && status!="" ) 
+	    {
+	    	String sql = "select * from ssaescalation where userid="+user.getUserid()+" and sitename ='"+sitename+"' and startdate between '"+startdate+"' and '"+ enddate  +"' and status='"+status+"';";
+	    	System.out.println(sql);
+	    	list = template.query("select * from ssaescalation where userid="+user.getUserid()+" and sitename ='"+sitename+"' and startdate between '"+startdate+"' and '"+ enddate  +"' and status='"+status+"';",new ResultSetExtractor<List<Escalations>>(){  
+	    		 List<Escalations> list1=new ArrayList<Escalations>(); 
+			     public List<Escalations> extractData(ResultSet rs) throws SQLException,  
+			            DataAccessException {  
+			      
+			        
+			        while(rs.next()){  
+			        Escalations e=new Escalations();  
+			        e.setSiteid(rs.getString(1));
+			        e.setSitename(rs.getString(2));
+			        e.setTechnology(rs.getString(3));
+			        e.setSite_status(rs.getString(4));
+			        e.setRo_region(rs.getString(5));
+			        e.setProject_scope(rs.getString(6));
+			        e.setStartdate(rs.getString(7));
+			        e.setEnddate(rs.getString(8));
+			        e.setStatus(rs.getString(9));
+			        e.setOriginator_mail(rs.getString(10));
+			        e.setResponsible(rs.getString(11));
+			        e.setCategory(rs.getString(12));
+			        e.setProblem_description(rs.getString(13));
+			        e.setRequested_action_history(rs.getString(14));
+			        e.setMail_reference(rs.getString(15));
+			        
+			        if(rs.getString(8)==null) {
+			        	System.out.println("......No of Days >>>>>>>>+NULL");
+			        e.setLead_time_in_days(getDateDifferences(rs.getString(7)));
+			        }
+			        else
+			        {
+			        e.setLead_time_in_days(getDateDifferences(rs.getString(7), rs.getString(8) ));
+			        }
+			        e.setUserid(rs.getInt(18));
+			        
+			        list1.add(e);  
+			        }  
+			        System.out.print("RECORD Size>>>>>>>"+list1.size());
+			        return list1;  
+			        }  
+			    });  
+	    	
+	    	
+	   
+	    }
+	
+	    if(enddate!="" && startdate!="" && status!="" ) 
+	    {
+	    	String sql = "select * from ssaescalation where userid="+user.getUserid()+"  and startdate between '"+startdate+"' and '"+ enddate  +"' and status='"+status+"';";
+	    	System.out.println(sql);
+	    	list = template.query("select * from ssaescalation where userid="+user.getUserid()+"  and startdate between '"+startdate+"' and '"+ enddate  +"' and status='"+status+"';",new ResultSetExtractor<List<Escalations>>(){  
+	    		 List<Escalations> list1=new ArrayList<Escalations>(); 
+			     public List<Escalations> extractData(ResultSet rs) throws SQLException,  
+			            DataAccessException {  
+			      
+			        
+			        while(rs.next()){  
+			        Escalations e=new Escalations();  
+			        e.setSiteid(rs.getString(1));
+			        e.setSitename(rs.getString(2));
+			        e.setTechnology(rs.getString(3));
+			        e.setSite_status(rs.getString(4));
+			        e.setRo_region(rs.getString(5));
+			        e.setProject_scope(rs.getString(6));
+			        e.setStartdate(rs.getString(7));
+			        e.setEnddate(rs.getString(8));
+			        e.setStatus(rs.getString(9));
+			        e.setOriginator_mail(rs.getString(10));
+			        e.setResponsible(rs.getString(11));
+			        e.setCategory(rs.getString(12));
+			        e.setProblem_description(rs.getString(13));
+			        e.setRequested_action_history(rs.getString(14));
+			        e.setMail_reference(rs.getString(15));
+			        
+			        if(rs.getString(8)==null) {
+			        	System.out.println("......No of Days >>>>>>>>+NULL");
+			        e.setLead_time_in_days(getDateDifferences(rs.getString(7)));
+			        }
+			        else
+			        {
+			        e.setLead_time_in_days(getDateDifferences(rs.getString(7), rs.getString(8) ));
+			        }
+			        e.setUserid(rs.getInt(18));
+			        
+			        list1.add(e);  
+			        }  
+			        System.out.print("RECORD Size>>>>>>>"+list1.size());
+			        return list1;  
+			        }  
+			    });  
+	    	
+	    	
+	   
+	    }
+	    
+	    if(enddate!="" && startdate!="" ) 
+	    {
+	    	String sql = "select * from ssaescalation where userid="+user.getUserid()+"  and startdate between '"+startdate+"' and '"+ enddate  +"';";
+	    	System.out.println(sql);
+	    	list = template.query("select * from ssaescalation where userid="+user.getUserid()+"  and startdate between '"+startdate+"' and '"+ enddate  +"';",new ResultSetExtractor<List<Escalations>>(){  
+	    		 List<Escalations> list1=new ArrayList<Escalations>(); 
+			     public List<Escalations> extractData(ResultSet rs) throws SQLException,  
+			            DataAccessException {  
+			      
+			        
+			        while(rs.next()){  
+			        Escalations e=new Escalations();  
+			        e.setSiteid(rs.getString(1));
+			        e.setSitename(rs.getString(2));
+			        e.setTechnology(rs.getString(3));
+			        e.setSite_status(rs.getString(4));
+			        e.setRo_region(rs.getString(5));
+			        e.setProject_scope(rs.getString(6));
+			        e.setStartdate(rs.getString(7));
+			        e.setEnddate(rs.getString(8));
+			        e.setStatus(rs.getString(9));
+			        e.setOriginator_mail(rs.getString(10));
+			        e.setResponsible(rs.getString(11));
+			        e.setCategory(rs.getString(12));
+			        e.setProblem_description(rs.getString(13));
+			        e.setRequested_action_history(rs.getString(14));
+			        e.setMail_reference(rs.getString(15));
+			        
+			        if(rs.getString(8)==null) {
+			        	System.out.println("......No of Days >>>>>>>>+NULL");
+			        e.setLead_time_in_days(getDateDifferences(rs.getString(7)));
+			        }
+			        else
+			        {
+			        e.setLead_time_in_days(getDateDifferences(rs.getString(7), rs.getString(8) ));
+			        }
+			        e.setUserid(rs.getInt(18));
+			        
+			        list1.add(e);  
+			        }  
+			        System.out.print("RECORD Size>>>>>>>"+list1.size());
+			        return list1;  
+			        }  
+			    });  
+	    	
+	    	
+	   
+	    }
+	    
+	    if(status!="" ) 
+	    {
+	    	String sql = "select * from ssaescalation where userid="+user.getUserid()+"  and status='"+status+"';";
+	    	System.out.println(sql);
+	    	list = template.query("select * from ssaescalation where userid="+user.getUserid()+ " and status='"+status+"';",new ResultSetExtractor<List<Escalations>>(){  
+	    		 List<Escalations> list1=new ArrayList<Escalations>(); 
+			     public List<Escalations> extractData(ResultSet rs) throws SQLException,  
+			            DataAccessException {  
+			      
+			        
+			        while(rs.next()){  
+			        Escalations e=new Escalations();  
+			        e.setSiteid(rs.getString(1));
+			        e.setSitename(rs.getString(2));
+			        e.setTechnology(rs.getString(3));
+			        e.setSite_status(rs.getString(4));
+			        e.setRo_region(rs.getString(5));
+			        e.setProject_scope(rs.getString(6));
+			        e.setStartdate(rs.getString(7));
+			        e.setEnddate(rs.getString(8));
+			        e.setStatus(rs.getString(9));
+			        e.setOriginator_mail(rs.getString(10));
+			        e.setResponsible(rs.getString(11));
+			        e.setCategory(rs.getString(12));
+			        e.setProblem_description(rs.getString(13));
+			        e.setRequested_action_history(rs.getString(14));
+			        e.setMail_reference(rs.getString(15));
+			        
+			        if(rs.getString(8)==null) {
+			        	System.out.println("......No of Days >>>>>>>>+NULL");
+			        e.setLead_time_in_days(getDateDifferences(rs.getString(7)));
+			        }
+			        else
+			        {
+			        e.setLead_time_in_days(getDateDifferences(rs.getString(7), rs.getString(8) ));
+			        }
+			        e.setUserid(rs.getInt(18));
+			        
+			        list1.add(e);  
+			        }  
+			        System.out.print("RECORD Size>>>>>>>"+list1.size());
+			        return list1;  
+			        }  
+			    });  
+	    	
+	    	
+	   
+	    }
+	    if(sitename!="" ) 
+	    {
+	    	String sql = "select * from ssaescalation where userid="+user.getUserid()+"  and sitename='"+sitename+"';";
+	    	System.out.println(sql);
+	    	list = template.query("select * from ssaescalation where userid="+user.getUserid()+ " and sitename='"+sitename+"';",new ResultSetExtractor<List<Escalations>>(){  
+	    		 List<Escalations> list1=new ArrayList<Escalations>(); 
+			     public List<Escalations> extractData(ResultSet rs) throws SQLException,  
+			            DataAccessException {  
+			      
+			        
+			        while(rs.next()){  
+			        Escalations e=new Escalations();  
+			        e.setSiteid(rs.getString(1));
+			        e.setSitename(rs.getString(2));
+			        e.setTechnology(rs.getString(3));
+			        e.setSite_status(rs.getString(4));
+			        e.setRo_region(rs.getString(5));
+			        e.setProject_scope(rs.getString(6));
+			        e.setStartdate(rs.getString(7));
+			        e.setEnddate(rs.getString(8));
+			        e.setStatus(rs.getString(9));
+			        e.setOriginator_mail(rs.getString(10));
+			        e.setResponsible(rs.getString(11));
+			        e.setCategory(rs.getString(12));
+			        e.setProblem_description(rs.getString(13));
+			        e.setRequested_action_history(rs.getString(14));
+			        e.setMail_reference(rs.getString(15));
+			        
+			        if(rs.getString(8)==null) {
+			        	System.out.println("......No of Days >>>>>>>>+NULL");
+			        e.setLead_time_in_days(getDateDifferences(rs.getString(7)));
+			        }
+			        else
+			        {
+			        e.setLead_time_in_days(getDateDifferences(rs.getString(7), rs.getString(8) ));
+			        }
+			        e.setUserid(rs.getInt(18));
+			        
+			        list1.add(e);  
+			        }  
+			        System.out.print("RECORD Size>>>>>>>"+list1.size());
+			        return list1;  
+			        }  
+			    });  
+	    	
+	    	
+	   
+	    }
+	    
+	    
+	    if(siteid!="" ) 
+	    {
+	    	String sql = "select * from ssaescalation where userid="+user.getUserid()+"  and siteid='"+siteid+"';";
+	    	System.out.println(sql);
+	    	list = template.query("select * from ssaescalation where userid="+user.getUserid()+ " and siteid='"+siteid+"';",new ResultSetExtractor<List<Escalations>>(){  
+	    		 List<Escalations> list1=new ArrayList<Escalations>(); 
+			     public List<Escalations> extractData(ResultSet rs) throws SQLException,  
+			            DataAccessException {  
+			      
+			        
+			        while(rs.next()){  
+			        Escalations e=new Escalations();  
+			        e.setSiteid(rs.getString(1));
+			        e.setSitename(rs.getString(2));
+			        e.setTechnology(rs.getString(3));
+			        e.setSite_status(rs.getString(4));
+			        e.setRo_region(rs.getString(5));
+			        e.setProject_scope(rs.getString(6));
+			        e.setStartdate(rs.getString(7));
+			        e.setEnddate(rs.getString(8));
+			        e.setStatus(rs.getString(9));
+			        e.setOriginator_mail(rs.getString(10));
+			        e.setResponsible(rs.getString(11));
+			        e.setCategory(rs.getString(12));
+			        e.setProblem_description(rs.getString(13));
+			        e.setRequested_action_history(rs.getString(14));
+			        e.setMail_reference(rs.getString(15));
+			        
+			        if(rs.getString(8)==null) {
+			        	System.out.println("......No of Days >>>>>>>>+NULL");
+			        e.setLead_time_in_days(getDateDifferences(rs.getString(7)));
+			        }
+			        else
+			        {
+			        e.setLead_time_in_days(getDateDifferences(rs.getString(7), rs.getString(8) ));
+			        }
+			        e.setUserid(rs.getInt(18));
+			        
+			        list1.add(e);  
+			        }  
+			        System.out.print("RECORD Size>>>>>>>"+list1.size());
+			        return list1;  
+			        }  
+			    });  
+	    	
+	    	
+	   
+	    }
+	    
+	    
+	   for(int i=0; i<list.size(); i++)
+	   {
+		   System.out.println( "Retrived Data >>"+list.get(i).getId());
+	   }
+	   System.out.print("RECORD Size>>>>Hole Return>>>"+list.size());
+	return list;
+}
+	
 }
