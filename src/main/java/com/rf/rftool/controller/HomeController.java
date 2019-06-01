@@ -284,6 +284,46 @@ public String getescalationsearch(ModelMap model  ,@RequestParam("id") int id, @
 	return "escalationsearchdetails";
 	
 	}
+
+
+@RequestMapping(value="/editescalation/{id}")  
+public String edit(@PathVariable int id,ModelMap model ,HttpSession session){  
+	User user1 = (User) session.getAttribute("USER_DETAILS");
+	List<Escalations> escalations;
+	escalations=escalationService.getEscalationById(user1, id);
+	
+	List<Status> statuslist= statusService.getStatusList();
+	List<Category> categoryList = categoryDAO.getCategoryList();
+	List<Projectscope> projectscopelist = projectscopeDAO.getProjectscopeList();
+	List<Responsible> responsiblelist = responsibleDAO.getResponsibleList();
+	
+	model.addAttribute("user",user1);
+	model.addAttribute("statuslist",statuslist);
+	model.addAttribute("categoryList" ,categoryList);
+	model.addAttribute("projectscopelist",projectscopelist);
+	model.addAttribute("responsiblelist", responsiblelist);
+	model.addAttribute("escalations",escalations.get(0));
+	return "editescalationfrom";
+}
+    
+
+
+
+@RequestMapping(value="/editscalation" , method = RequestMethod.POST)
+public String editscalation(@Valid @ModelAttribute("escalations")Escalations escalations,
+		BindingResult bindingResult, ModelMap model,RedirectAttributes redirectAttributes,HttpSession session){  
+	User user1 = (User) session.getAttribute("USER_DETAILS");
+	//List<Escalations> escalations;
+	//escalations=escalationService.getEscalationById(user1, id);
+	
+	//escalations.getId();
+	System.out.println("edit scalation>>>>"+escalations.getId());
+	
+	return "updatedescalation";
+}
+   
+
+
 }
 
 

@@ -125,7 +125,7 @@ JdbcTemplate template;
 		        
 		        
 		        
-		        e.setUserid(rs.getInt(18));
+		        e.setId(rs.getInt(18));
 		        
 		        
 		        
@@ -178,11 +178,8 @@ JdbcTemplate template;
 		        {
 		        e.setLead_time_in_days(getDateDifferences(rs.getString(7), rs.getString(8) ));
 		        }
-		        e.setUserid(rs.getInt(18));
-		        
-		        
-		        
-		        
+		        e.setId(rs.getInt(18));
+		       
 		        
 		        list.add(e);  
 		        }  
@@ -275,7 +272,7 @@ public List<Escalations> getEscalationBySerach(User user, String siteid, String 
 			        {
 			        e.setLead_time_in_days(getDateDifferences(rs.getString(7), rs.getString(8) ));
 			        }
-			        e.setUserid(rs.getInt(18));
+			        e.setId(rs.getInt(18));
 			        
 			        
 			        
@@ -327,7 +324,7 @@ public List<Escalations> getEscalationBySerach(User user, String siteid, String 
 			        {
 			        e.setLead_time_in_days(getDateDifferences(rs.getString(7), rs.getString(8) ));
 			        }
-			        e.setUserid(rs.getInt(18));
+			        e.setId(rs.getInt(18));
 			        
 			        list1.add(e);  
 			        }  
@@ -376,7 +373,7 @@ public List<Escalations> getEscalationBySerach(User user, String siteid, String 
 			        {
 			        e.setLead_time_in_days(getDateDifferences(rs.getString(7), rs.getString(8) ));
 			        }
-			        e.setUserid(rs.getInt(18));
+			        e.setId(rs.getInt(18));
 			        
 			        list1.add(e);  
 			        }  
@@ -425,7 +422,7 @@ public List<Escalations> getEscalationBySerach(User user, String siteid, String 
 			        {
 			        e.setLead_time_in_days(getDateDifferences(rs.getString(7), rs.getString(8) ));
 			        }
-			        e.setUserid(rs.getInt(18));
+			        e.setId(rs.getInt(18));
 			        
 			        list1.add(e);  
 			        }  
@@ -474,7 +471,7 @@ public List<Escalations> getEscalationBySerach(User user, String siteid, String 
 			        {
 			        e.setLead_time_in_days(getDateDifferences(rs.getString(7), rs.getString(8) ));
 			        }
-			        e.setUserid(rs.getInt(18));
+			        e.setId(rs.getInt(18));
 			        
 			        list1.add(e);  
 			        }  
@@ -522,7 +519,7 @@ public List<Escalations> getEscalationBySerach(User user, String siteid, String 
 			        {
 			        e.setLead_time_in_days(getDateDifferences(rs.getString(7), rs.getString(8) ));
 			        }
-			        e.setUserid(rs.getInt(18));
+			        e.setId(rs.getInt(18));
 			        
 			        list1.add(e);  
 			        }  
@@ -572,7 +569,7 @@ public List<Escalations> getEscalationBySerach(User user, String siteid, String 
 			        {
 			        e.setLead_time_in_days(getDateDifferences(rs.getString(7), rs.getString(8) ));
 			        }
-			        e.setUserid(rs.getInt(18));
+			        e.setId(rs.getInt(18));
 			        
 			        list1.add(e);  
 			        }  
@@ -585,12 +582,6 @@ public List<Escalations> getEscalationBySerach(User user, String siteid, String 
 	   
 	    }
 	    
-	    
-	   for(int i=0; i<list.size(); i++)
-	   {
-		   System.out.println( "Retrived Data >>"+list.get(i).getId());
-	   }
-	   System.out.print("RECORD Size>>>>Hole Return>>>"+list.size());
 	return list;
 }
 	

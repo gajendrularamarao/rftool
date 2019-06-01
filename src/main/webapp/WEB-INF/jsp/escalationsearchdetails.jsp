@@ -13,13 +13,32 @@
 	<title>OX Escalation Tool </title>
 	<link href="${contextPath}/css/bootstrap.css"      rel="stylesheet">
 	<link href="${contextPath}/css/custom.css"      rel="stylesheet">
+	<link href="${contextPath}/css/datatable.css"      rel="stylesheet">
+	<script type="text/javascript" src="${contextPath}/js/jquery-3.3.1.js"></script>
+	<script type="text/javascript" src="${contextPath}/js/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="${contextPath}/js/jquery.dataTables.min.js"></script>
 <style>
 #tabledis{
  font-size:12px;
  color:#053E75;	
  text-decoration:none;
 }
+#wrap {
+    overflow: auto;
+    height: 400px;
+}
 </style>	
+	
+<script type="text/javascript">
+	$(document).ready(function() {
+    $('#example').DataTable();
+} );
+
+document.getElementById("wrap").addEventListener("scroll",function(){
+		   var translate = "translate(0,"+this.scrollTop+"px)";
+		   this.querySelector("thead").style.transform = translate;
+		});
+</script>
 	
 </head>
 <body>
@@ -89,8 +108,8 @@
       <td width="90%" align="center">  
            <font size="4" color="red" face="verdana" > Escalation Search </font>
        
-       
-<table id="tabledis"  border="1" style="width:100%" cellpadding="0">
+   <div id="wrap">   
+<table  id="tabledis" border="1" style="width:100%" cellpadding="0">
 <tr ><th>Site ID</th><th>Site Name</th><th>Technology Name</th>
 <th>Site Status</th><th>RO Region</th>
 <th>Project Scope</th><th>Start Date</th><th>End Date</th>
@@ -98,7 +117,7 @@
 <th>Responsible</th><th>Category</th>
 <th>Problem Description</th><th>Request Action history</th>
 <th>Mail Refereance</th><th>Lead Time</th>
-<th>User ID</th>
+<th>Escalation ID</th>
 </tr>  	
 
    <c:forEach var="esc" items="${escalations}"> 
@@ -113,23 +132,22 @@
    <td>${esc.enddate}</td>  
    <td>${esc.status}</td>  
    <td>${esc.originator_mail}</td>  
-   
-    <td>${esc.responsible}</td>  
+   <td>${esc.responsible}</td>  
    <td>${esc.category}</td> 
    <td>${esc.problem_description}</td>  
    <td>${esc.requested_action_history}</td>  
    <td>${esc.mail_reference}</td>  
    <td>${esc.lead_time_in_days}</td>  
-     <td>${esc.userid}</td>  
-   
-   <td><a href="/editstudent/${esc.userid}">Edit</a></td>  
+     
+   <td>${esc.id}</td> 
+   <td><a href="/editescalation/${esc.id}">Edit</a></td>  
    
    </tr>  
    </c:forEach> 
    
    
    </table>  
-   
+   </div>
        </td>
        
       </tr>

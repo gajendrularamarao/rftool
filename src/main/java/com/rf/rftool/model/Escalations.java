@@ -10,7 +10,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 public class Escalations {
 	
-	@Id 
+	@NotNull
 	private int id;
 	
 	@NotNull
