@@ -75,7 +75,7 @@
 					<td>Start Date</td>
 					<td><form:input type="date" path="startdate" id="startdate"/> <form:errors path="startdate" cssStyle="color: #ff0000; font-size: 10px;"> </form:errors>  </td>
 					<td>End Date</td>
-					<td><form:input type="date" path="enddate" id="enddate" disabled="true"/> <form:errors path="enddate" cssStyle="color: #ff0000; font-size: 10px;"> </form:errors>  </td>
+					<td><form:input type="date" path="enddate" id="enddate"/> <form:errors path="enddate" cssStyle="color: #ff0000; font-size: 10px;"> </form:errors>  </td>
 				</tr>
 				<tr>
 					<td>Status</td>

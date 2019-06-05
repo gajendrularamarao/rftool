@@ -32,9 +32,11 @@ import com.rf.rftool.service.StatusService;
 import com.rf.rftool.service.Userservice;
 import com.rf.rftool.validator.EscalationValidator;
 import com.rf.rftool.dao.CategoryDAO;
+import com.rf.rftool.dao.DashboardDAO;
 import com.rf.rftool.dao.ProjectscopeDAO;
 import com.rf.rftool.dao.ResponsibleDAO;
 import com.rf.rftool.model.Category;
+import com.rf.rftool.model.Dashboard;
 import com.rf.rftool.model.Escalations;
 import com.rf.rftool.model.LoginForm;
 import com.rf.rftool.model.Projectscope;
@@ -55,6 +57,8 @@ public class HomeController {
 	    private  ProjectscopeDAO projectscopeDAO;
 	    @Autowired
 	    private ResponsibleDAO responsibleDAO;
+	    @Autowired
+	    private DashboardDAO dashboardDAO;
 	    
 	
 		@RequestMapping(value ="/enroll",method = RequestMethod.GET)
@@ -133,6 +137,8 @@ public String getHomePage(ModelMap model) {
     System.out.println(user1.getUsername());
     request.getSession().setAttribute("USER_DETAILS",user1);
     model.addAttribute("user", user1);
+    List<Dashboard> dashboard= dashboardDAO.getDashboard(user1);
+	 model.addAttribute("dashboard",dashboard);
     return new ModelAndView("userloged");
     
 	
@@ -310,18 +316,32 @@ public String edit(@PathVariable int id,ModelMap model ,HttpSession session){
 
 
 @RequestMapping(value="/editscalation" , method = RequestMethod.POST)
-public String editscalation(@Valid @ModelAttribute("escalations")Escalations escalations,
+public ModelAndView editscalation(@Valid @ModelAttribute("escalations")Escalations escalations,
 		BindingResult bindingResult, ModelMap model,RedirectAttributes redirectAttributes,HttpSession session){  
 	User user1 = (User) session.getAttribute("USER_DETAILS");
-	//List<Escalations> escalations;
-	//escalations=escalationService.getEscalationById(user1, id);
-	
-	//escalations.getId();
-	System.out.println("edit scalation>>>>"+escalations.getId());
-	
-	return "updatedescalation";
+	Escalations escalations1;
+	escalations1=escalationService.update(escalations, user1);	
+	model.addAttribute("user",user1);
+	model.addAttribute("escalations",escalations1);
+	List<Escalations> list= new ArrayList<Escalations>();
+ 	list.add(escalations1);
+		
+		return new ModelAndView("updatedescalation", "list",list);
 }
    
+
+@RequestMapping("/escalationdashform")  
+
+public ModelAndView userdashboard(ModelMap model, HttpSession session){  
+	 
+	 User user1 = (User) session.getAttribute("USER_DETAILS");
+	 model.addAttribute("user",user1);
+	 List<Dashboard> dashboard= dashboardDAO.getDashboard(user1);
+	 model.addAttribute("dashboard",dashboard);
+	 return new ModelAndView("userloged");
+   
+} 
+
 
 
 }

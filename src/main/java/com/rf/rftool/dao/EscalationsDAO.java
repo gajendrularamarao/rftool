@@ -584,5 +584,50 @@ public List<Escalations> getEscalationBySerach(User user, String siteid, String 
 	    
 	return list;
 }
+/////
+@Override
+public Escalations update(Escalations e, User user) {
+	
+	 
+	String sql ="UPDATE ssaescalation SET siteid ='"+e.getSiteid() +"', sitename ='"+ e.getSitename()  + "', technology ='"+ e.getTechnology()+"',"
+			+ "site_status ='"+ e.getSite_status()+"', ro_region = '"+e.getRo_region()+"', project_scope ='"+ e.getProject_scope()+"', startdate ='"+ e.getStartdate() +
+			"', enddate ='"+ e.getEnddate()+"', status ='"+ e.getStatus()  +"', originator_mail = '"+ e.getOriginator_mail() +"', responsible ='"+e.getResponsible() +
+			"', category ='"+ e.getCategory()+"', problem_description ='"+ e.getProblem_description()  +"', requested_action_history = '"+e.getRequested_action_history()+
+			"', mail_reference ='"+ e.getMail_reference()  +"', lead_time_in_days = "+ getDateDifferences(e.getStartdate() , e.getEnddate())+", userid = "+ user.getUserid()   +"  WHERE id ="+e.getId()+";" ; 
+	System.out.println("Update the record >>>>>>"+ sql  );
+	template.update(sql);		
+	 return template.query("SELECT * FROM ssaescalation WHERE id="+e.getId()+";" ,new ResultSetExtractor<Escalations>(){  
+		    
+	     public Escalations extractData(ResultSet rs) throws SQLException,  
+	            DataAccessException {  
+	      
+	    	 Escalations escalations= new Escalations();
+	        while(rs.next()){  
+	       
+	         escalations.setSiteid(rs.getString(1));
+	         escalations.setSitename(rs.getString(2));
+	         escalations.setTechnology(rs.getString(3));
+	         escalations.setSite_status(rs.getString(4));
+	         escalations.setRo_region(rs.getString(5));
+	         escalations.setProject_scope(rs.getString(6));
+	         escalations.setStartdate(rs.getString(7));
+	         escalations.setEnddate(rs.getString(8));
+	         escalations.setStatus(rs.getString(9));
+	         escalations.setOriginator_mail(rs.getString(10));
+	         escalations.setResponsible(rs.getString(11));
+	         escalations.setCategory(rs.getString(12));
+	         escalations.setProblem_description(rs.getString(13));
+	         escalations.setRequested_action_history(rs.getString(14));
+	         escalations.setMail_reference(rs.getString(15));
+	         escalations.setLead_time_in_days(rs.getInt(16));
+	         escalations.setId(rs.getInt(18));
+	        }  
+	        return escalations;  
+	        }  
+	    });
+  
+}
+
+
 	
 }

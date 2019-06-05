@@ -44,6 +44,14 @@ public class EscalationService implements IEscalationservice {
 		
 		return escalationsDAO.getEscalationBySerach(user, siteid, sitename, startdate, enddate, status);
 	}
+
+	@Override
+	public Escalations update(Escalations e, User user) {
+		
+		
+		
+		return escalationsDAO.update(e, user);
+	}
 	
 
 }

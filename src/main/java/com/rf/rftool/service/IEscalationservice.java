@@ -7,6 +7,7 @@ import com.rf.rftool.model.Escalations;
 
 public interface IEscalationservice {
 	public Escalations save(Escalations e , User user);
+	public Escalations update(Escalations e , User user);
 	public List<Escalations> getAllEscalations(User user);
 	public List<Escalations> getEscalationById(User user,int id);
 	public List<Integer> getEscalationIds(User user);
