@@ -28,8 +28,9 @@ public class Userservice implements IUserservice {
 	}
 
 	@Override
-	public void update(User p) {
-		// TODO Auto-generated method stub
+	public User update(User p) {
+		
+		return userDAO.update(p);
 		
 	}
 

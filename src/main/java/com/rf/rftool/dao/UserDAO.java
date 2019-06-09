@@ -14,6 +14,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.stereotype.Service;
 
+import com.rf.rftool.model.Escalations;
 import com.rf.rftool.model.User;
 
 @Service
@@ -86,8 +87,28 @@ public class UserDAO implements IUser {
 	}
 
 	@Override
-	public void update(User p) {
-		// TODO Auto-generated method stub
+	public User update(User p) {
+		
+		String sql ="UPDATE user_details SET user_name ='"+p.getUsername()+"', user_roll ='"+ p.getUserroll()  + "', user_mailid ='"+ p.getMailid()+"',"
+				+ "user_pass ='"+ p.getUserpass()+"'  WHERE userid = "+p.getUserid()+";" ; 
+		System.out.println("Update the record >>>>>>"+ sql  );
+		template.update(sql);		
+		 return template.query("SELECT * FROM user_details WHERE userid = "+p.getUserid()+";" ,new ResultSetExtractor<User>(){  
+			    
+		     public User extractData(ResultSet rs) throws SQLException,  
+		         DataAccessException {  
+		      	 User user= new User();
+		         while(rs.next()){  
+		         user.setUserid(rs.getInt(1));
+		         user.setUsername(rs.getString(2));
+		         user.setUserroll(rs.getString(3));
+		         user.setMailid(rs.getString(4));
+		         }  
+		        return user;  
+		        }  
+		    });
+		
+		
 		
 	}
 
