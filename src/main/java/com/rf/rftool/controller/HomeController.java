@@ -35,6 +35,7 @@ import com.rf.rftool.dao.CategoryDAO;
 import com.rf.rftool.dao.DashboardDAO;
 import com.rf.rftool.dao.ProjectscopeDAO;
 import com.rf.rftool.dao.ResponsibleDAO;
+import com.rf.rftool.dao.TechnologyDAO;
 import com.rf.rftool.model.Category;
 import com.rf.rftool.model.Dashboard;
 import com.rf.rftool.model.Escalations;
@@ -42,6 +43,7 @@ import com.rf.rftool.model.LoginForm;
 import com.rf.rftool.model.Projectscope;
 import com.rf.rftool.model.Responsible;
 import com.rf.rftool.model.Status;
+import com.rf.rftool.model.Technology;
 
 @Controller
 public class HomeController {
@@ -59,6 +61,9 @@ public class HomeController {
 	    private ResponsibleDAO responsibleDAO;
 	    @Autowired
 	    private DashboardDAO dashboardDAO;
+	    
+	    @Autowired
+	    private TechnologyDAO technologyDAO;
 	    
 	
 		@RequestMapping(value ="/enroll",method = RequestMethod.GET)
@@ -79,12 +84,14 @@ public class HomeController {
 			List<Category> categoryList = categoryDAO.getCategoryList();
 			List<Projectscope> projectscopelist = projectscopeDAO.getProjectscopeList();
 			List<Responsible> responsiblelist = responsibleDAO.getResponsibleList();
+			List<Technology>  technologylist = technologyDAO.getTechnologyList();
 			model.addAttribute("user",user1);
 			model.addAttribute("statuslist",statuslist);
 			model.addAttribute("categoryList" ,categoryList);
 			model.addAttribute("projectscopelist",projectscopelist);
 			model.addAttribute("responsiblelist", responsiblelist);
 			model.addAttribute("escalations", escalations);
+			model.addAttribute("technologylist", technologylist);
 			return new ModelAndView("escalationform"); 
 	  }
 	  
@@ -230,12 +237,14 @@ public String getescalationform(ModelMap model , HttpSession session) {
 	List<Category> categoryList = categoryDAO.getCategoryList();
 	List<Projectscope> projectscopelist = projectscopeDAO.getProjectscopeList();
 	List<Responsible> responsiblelist = responsibleDAO.getResponsibleList();
+	List<Technology>  technologylist = technologyDAO.getTechnologyList();
 	model.addAttribute("user",user1);
 	model.addAttribute("statuslist",statuslist);
 	model.addAttribute("categoryList" ,categoryList);
 	model.addAttribute("projectscopelist",projectscopelist);
 	model.addAttribute("responsiblelist", responsiblelist);
 	model.addAttribute("escalations", escalations);
+	model.addAttribute("technologylist", technologylist);
 	return "escalationform";
 	}
 
@@ -315,6 +324,7 @@ public String edit(@PathVariable int id,ModelMap model ,HttpSession session){
 	List<Category> categoryList = categoryDAO.getCategoryList();
 	List<Projectscope> projectscopelist = projectscopeDAO.getProjectscopeList();
 	List<Responsible> responsiblelist = responsibleDAO.getResponsibleList();
+	List<Technology>  technologylist = technologyDAO.getTechnologyList();
 	
 	model.addAttribute("user",user1);
 	model.addAttribute("statuslist",statuslist);
@@ -322,6 +332,7 @@ public String edit(@PathVariable int id,ModelMap model ,HttpSession session){
 	model.addAttribute("projectscopelist",projectscopelist);
 	model.addAttribute("responsiblelist", responsiblelist);
 	model.addAttribute("escalations",escalations.get(0));
+	model.addAttribute("technologylist", technologylist);
 	return "editescalationfrom";
 }
     

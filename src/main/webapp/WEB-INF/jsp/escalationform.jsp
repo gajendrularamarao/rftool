@@ -51,7 +51,15 @@
 				</tr>
 				<tr>
 					<td>Technology</td>
-					<td><form:input type="text" path="technology" id="technology" /> <form:errors path="technology" cssStyle="color: #ff0000; font-size: 10px;"> </form:errors>  </td>
+			
+					<td> 
+					    <form:select path="technology" id="technology">
+                           <form:option value="NONE" label="--- Select ---"/>
+                             <c:forEach var="item" items="${technologylist}">
+                         <form:option value="${item.technologyname}">${item.technologyname}</form:option>
+                        </c:forEach>
+                       </form:select> <form:errors path="technology" cssStyle="color: #ff0000; font-size: 10px;"> </form:errors> 
+                  	 </td>
 					<td>Site Status</td>
 					<td> <form:input type="text" path="site_status" id="site_status" /> <form:errors path="site_status" cssStyle="color: #ff0000; font-size: 10px;"> </form:errors>  </td>
 				</tr>
