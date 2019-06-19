@@ -43,7 +43,7 @@ public class LoginController {
 	
 	
 	@RequestMapping(value ="/update",method = RequestMethod.POST)
-	public String update(ModelMap model , @Valid User user ,HttpSession session) {
+	public String update(ModelMap model , User user ,HttpSession session) {
 		User user1 = (User) session.getAttribute("USER_DETAILS");
 		
 		System.out.print(user.getUserid());

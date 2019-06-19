@@ -113,10 +113,10 @@ document.getElementById("wrap").addEventListener("scroll",function(){
          <form:form method="POST" modelAttribute="user" action="update">
           <table width="50%	" border="1" align="center" height="100">
             <tr > <td align="center">  <h4>Change Password </h4>  </td></tr>
-            <tr><td> <label for="email">Email  :</label> <form:input path="mailid" type="text" placeholder="Enter Mail ID" name="mailid" /><form:errors path="mailid" cssStyle="color: #ff0000; font-size: 10px;" > </form:errors> </td> </tr>
-            <tr><td><label for="email">User name :</label> <form:input path="username" type="text" placeholder="username"  name="mailid"/><form:errors path="username" cssStyle="color: #ff0000; font-size: 10px;" > </form:errors></td></tr>
-            <tr><td><label for="Designation">Designation : </label><form:input path="userroll" type="text" placeholder="userroll"  name="userroll"/><form:errors path="userroll" cssStyle="color: #ff0000; font-size: 10px;"> </form:errors></td></tr>
-            <tr><td><label for="Designation">Password : </label> <form:input path="userpass" type="password" placeholder="Enter Password" name="userpass"/><form:errors path="userpass" cssStyle="color: #ff0000; font-size: 10px;"></form:errors></td> </tr>
+            <tr><td> <label for="email">Email  :</label> <form:input path="mailid" type="text" placeholder="Enter Mail ID" name="mailid" disabled="true"/> </td> </tr>
+            <tr><td><label for="email">User name :</label> <form:input path="username" type="text" placeholder="username"  name="username" disabled="true" /></td></tr>
+            <tr><td><label for="Designation">Designation : </label><form:input path="userroll" type="text" placeholder="userroll"  name="userroll" disabled="true"/></td></tr>
+            <tr><td><label for="Designation">Password : </label> <form:input path="userpass" type="password" placeholder="Enter Password" name="userpass"/></td> </tr>
             
             <tr><td align="center"><form:button type="submit"  onclick="return Validate()">submit </form:button></td></tr>
           </table> 

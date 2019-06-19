@@ -14,9 +14,11 @@
 	<link href="${contextPath}/css/bootstrap.css"      rel="stylesheet">
 	<link href="${contextPath}/css/custom.css"      rel="stylesheet">
 	<link href="${contextPath}/css/datatable.css"      rel="stylesheet">
+	<script type="text/javascript" src="${contextPath}/js/FileSaver.js"></script>  
 	<script type="text/javascript" src="${contextPath}/js/jquery-3.3.1.js"></script>
 	<script type="text/javascript" src="${contextPath}/js/jquery-3.4.1.min.js"></script>
 	<script type="text/javascript" src="${contextPath}/js/jquery.dataTables.min.js"></script>
+	
 <style>
 #tabledis{
  font-size:12px;
@@ -82,6 +84,41 @@ document.getElementById("wrap").addEventListener("scroll",function(){
                 }
                  }
 
+            function ExportFile() {  
+                var fileName = $("#exportFileName").val();  
+                if (fileName.substr(-5, 5) !== '.xlsx') {  
+                    fileName += '.xlsx';  
+                }  
+                var json = JSON.stringify(workbook.toJSON());  
+
+                excelIO.save(json, function (blob) {  
+                    saveAs(blob, fileName);  
+                }, function (e) {  
+                    if (e.errorCode === 1) {  
+                        alert(e.errorMessage);  
+                    }  
+                });  
+            } 
+
+            function ExportFile() {  
+                alert("enter name");
+                var fileName = export.xlsx;  
+                if (fileName.substr(-5, 5) !== '.xlsx') {  
+                    fileName += '.xlsx';  
+                }  
+                var json = JSON.stringify(workbook.toJSON());  
+
+                excelIO.save(json, function (blob) {  
+                    saveAs(blob, fileName);  
+                }, function (e) {  
+                    if (e.errorCode === 1) {  
+                        alert(e.errorMessage);  
+                    }  
+                });  
+            }  
+
+         
+            
 	</script>
 
 
@@ -106,7 +143,8 @@ document.getElementById("wrap").addEventListener("scroll",function(){
       
        </td>
       <td width="90%" align="center">  
-           <font size="4" color="red" face="verdana" > Escalation Search </font>
+           <font size="4" color="red" face="verdana" > Escalation Search  </font> 
+           <button id="export" onclick="ExportFile()">Download Report</button>  
        
    <div id="wrap">   
 <table  id="tabledis" border="1" style="width:100%" cellpadding="0">

@@ -139,11 +139,16 @@ public String getHomePage(ModelMap model) {
     model.addAttribute("user", user1);
     List<Dashboard> dashboard= dashboardDAO.getDashboard(user1);
 	 model.addAttribute("dashboard",dashboard);
-    return new ModelAndView("userloged");
-    
+	if(user1.getUserroll().equalsIgnoreCase("Engineer")){
+       return new ModelAndView("userloged");
+	   }else {
+       return new ModelAndView("adminloged");}
 	
-		}
     }
+     
+     
+    }
+ 
   @RequestMapping(value="/registration", method = RequestMethod.GET)
   public String getRegistration(ModelMap model) {
   	   User user = new User();
@@ -197,8 +202,11 @@ public String getHomePage(ModelMap model) {
 
   @RequestMapping(value="/escalationserach", method = RequestMethod.GET)
   public String escalationserach(ModelMap model , HttpSession session) {
-	  Escalations escalations = new Escalations();
+	  
 	  User user1 = (User) session.getAttribute("USER_DETAILS");
+	  if(user1!=null)
+	  {
+	  Escalations escalations = new Escalations();
 	  List<Status> statuslist= statusService.getStatusList();
 	  List<Integer> listids = escalationService.getEscalationIds(user1);
 	  model.addAttribute("user",user1);
@@ -206,6 +214,11 @@ public String getHomePage(ModelMap model) {
 	  model.addAttribute("statuslist",statuslist);
 	  model.addAttribute("listids",listids);
 	  return "escalationsearch";
+	  }
+	  else
+	  {
+		  return "index";
+	  }
   }
 
   
