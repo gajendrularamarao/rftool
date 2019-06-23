@@ -86,7 +86,7 @@ document.getElementById("wrap").addEventListener("scroll",function(){
 	</script>
 
 
-  <table align="center" border="0" width="85%" >
+  <table align="center" border="0" width="100%" >
    <tr id="header" ><td id="logo"><jsp:include page="header.jsp"></jsp:include> </td></tr>
   <tr id="menuheader">
    <td><table border="0" width="100%" align="center">
@@ -100,18 +100,18 @@ document.getElementById("wrap").addEventListener("scroll",function(){
    </tr> 
     <tr bgcolor="#E3F1EC">
      <td>
-      <table width="100%"  border="2" align="center" height="450">
+      <table width="100%"  border="2" align="center" height="500">
       <tr valign="top" height="100" >
       <td width="10%" align="left"> 
       
-      <jsp:include page="escalationsidemenu.jsp"></jsp:include>
+      <jsp:include page="adminmenu.jsp"></jsp:include>
       
        </td>
       <td width="90%" align="center">  
            
        
    
-         <form:form method="POST" modelAttribute="user" action="update">
+         <form:form method="POST" modelAttribute="user" action="adminpasswordupdate">
           <table width="50%	" border="1" align="center" height="100">
             <tr > <td align="center">  <h4>Change Password </h4>  </td></tr>
             <tr><td> <label for="email">Email  :</label> <form:input path="mailid" type="text" placeholder="Enter Mail ID" name="mailid" disabled="true"/> </td> </tr>

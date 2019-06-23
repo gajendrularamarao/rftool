@@ -24,8 +24,8 @@
    <td><table border="0" width="100%" align="center">
     <tr><td width="50%" align="right" ><div class="topnav"><a href="#home">Home</a>
           <a href="#">Escalation</a></div></td>
-         <td width="20%" align="left">Welcome.. <font size="2" color=red> ${user.username} </font> </td>  
-         <td width="20%" align="left">Designation <font size="3" color=red> ${user.userroll} </font> </td>                      
+         <td width="20%" align="left">Welcome.. <font font="2" color=red> ${user.username} </font> </td> 
+         <td width="20%" align="left">Designation <font size="3" color=red> ${user.userroll} </font> </td>                       
          <td width="10%" align="right"><a href="${contextPath}/logout" id="log">Logout</a></td> </tr>
       </table>
     </td>
@@ -35,28 +35,23 @@
       <table width="100%"  border="2" align="center" height="500">
       <tr valign="top" height="100" >
       <td width="15%" align="left"> 
-      
-        <jsp:include page="escalationsidemenu.jsp"></jsp:include>
+       <jsp:include page="adminmenu.jsp"></jsp:include>
        </td>
       <td width="85%" align="center">  
-       <font size="4" color="red" face="verdana" > Escalation Update Form </font>
-      <form:form method="POST" modelAttribute="escalations" action="/editscalation">
+       <font size="4" color="red" face="verdana" > Escalation Form </font>
+      <form:form method="POST" modelAttribute="escalations" action="adminsave">
 	 
 	  <table align=center border="1" style="width:70%">
-	        
-	            <tr>
-	            <td><form:hidden path="id"></form:hidden> </td>
-	            
-	            </tr>
+	           
 				<tr>
 					<td>site ID</td>
-					<td> <form:input type="text" path="siteid" id="siteid"/> <form:errors path="siteid" cssStyle="color: #ff0000; font-size: 10px;"> </form:errors> </td>
+					<td> <form:input type="text" path="siteid" id="siteid" /> <form:errors path="siteid" cssStyle="color: #ff0000; font-size: 10px;"> </form:errors> </td>
 					<td>site Name</td>
 					<td> <form:input type="text" path="sitename" id="sitename" /> <form:errors path="sitename" cssStyle="color: #ff0000; font-size: 10px;"> </form:errors>  </td>
 				</tr>
 				<tr>
 					<td>Technology</td>
-					
+			
 					<td> 
 					    <form:select path="technology" id="technology">
                            <form:option value="NONE" label="--- Select ---"/>
@@ -84,7 +79,7 @@
 					<td>Start Date</td>
 					<td><form:input type="date" path="startdate" id="startdate"/> <form:errors path="startdate" cssStyle="color: #ff0000; font-size: 10px;"> </form:errors>  </td>
 					<td>End Date</td>
-					<td><form:input type="date" path="enddate" id="enddate"/> <form:errors path="enddate" cssStyle="color: #ff0000; font-size: 10px;"> </form:errors>  </td>
+					<td><form:input type="date" path="enddate" id="enddate" disabled="true"/> <form:errors path="enddate" cssStyle="color: #ff0000; font-size: 10px;"> </form:errors>  </td>
 				</tr>
 				<tr>
 					<td>Status</td>
@@ -147,7 +142,7 @@
 				<input type="submit" value="submit" class="btn btn-primary btn-sm">
 			</div>
 		</div></td></tr>
-				
+				 
 				</table>
 	  
 	  	</form:form>

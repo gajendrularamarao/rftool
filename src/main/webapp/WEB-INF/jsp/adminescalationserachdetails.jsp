@@ -14,10 +14,11 @@
 	<link href="${contextPath}/css/bootstrap.css"      rel="stylesheet">
 	<link href="${contextPath}/css/custom.css"      rel="stylesheet">
 	<link href="${contextPath}/css/datatable.css"      rel="stylesheet">
-	<link href="${contextPath}/css/main.css"      rel="stylesheet">
+	<script type="text/javascript" src="${contextPath}/js/FileSaver.js"></script>  
 	<script type="text/javascript" src="${contextPath}/js/jquery-3.3.1.js"></script>
 	<script type="text/javascript" src="${contextPath}/js/jquery-3.4.1.min.js"></script>
 	<script type="text/javascript" src="${contextPath}/js/jquery.dataTables.min.js"></script>
+	
 <style>
 #tabledis{
  font-size:12px;
@@ -83,10 +84,45 @@ document.getElementById("wrap").addEventListener("scroll",function(){
                 }
                  }
 
+            function ExportFile() {  
+                var fileName = $("#exportFileName").val();  
+                if (fileName.substr(-5, 5) !== '.xlsx') {  
+                    fileName += '.xlsx';  
+                }  
+                var json = JSON.stringify(workbook.toJSON());  
+
+                excelIO.save(json, function (blob) {  
+                    saveAs(blob, fileName);  
+                }, function (e) {  
+                    if (e.errorCode === 1) {  
+                        alert(e.errorMessage);  
+                    }  
+                });  
+            } 
+
+            function ExportFile() {  
+                alert("enter name");
+                var fileName = export.xlsx;  
+                if (fileName.substr(-5, 5) !== '.xlsx') {  
+                    fileName += '.xlsx';  
+                }  
+                var json = JSON.stringify(workbook.toJSON());  
+
+                excelIO.save(json, function (blob) {  
+                    saveAs(blob, fileName);  
+                }, function (e) {  
+                    if (e.errorCode === 1) {  
+                        alert(e.errorMessage);  
+                    }  
+                });  
+            }  
+
+         
+            
 	</script>
 
 
-  <table align="center" border="0" width="85%" >
+  <table align="center" border="0" width="100%" >
    <tr id="header" ><td id="logo"><jsp:include page="header.jsp"></jsp:include> </td></tr>
   <tr id="menuheader">
    <td><table border="0" width="100%" align="center">
@@ -100,35 +136,57 @@ document.getElementById("wrap").addEventListener("scroll",function(){
    </tr> 
     <tr bgcolor="#E3F1EC">
      <td>
-      <table width="100%"  border="2" align="center" height="450">
+      <table width="100%"  border="2" align="center" height="500">
       <tr valign="top" height="100" >
       <td width="10%" align="left"> 
       
-      <jsp:include page="escalationsidemenu.jsp"></jsp:include>
+      <jsp:include page="adminmenu.jsp"></jsp:include>
       
        </td>
       <td width="90%" align="center">  
-           
+           <font size="4" color="red" face="verdana" > Escalation Search  </font> 
+           <button id="export" onclick="ExportFile()">Download Report</button>  
        
+   <div id="wrap">   
+<table  id="tabledis" border="1" style="width:100%" cellpadding="0">
+<tr ><th>Site ID</th><th>Site Name</th><th>Technology Name</th>
+<th>Site Status</th><th>RO Region</th>
+<th>Project Scope</th><th>Start Date</th><th>End Date</th>
+<th>Status </th><th>Originator Mail</th>
+<th>Responsible</th><th>Category</th>
+<th>Problem Description</th><th>Request Action history</th>
+<th>Mail Refereance</th><th>Lead Time</th>
+<th>Escalation ID</th>
+</tr>  	
+
+   <c:forEach var="esc" items="${escalations}"> 
+   <tr>  
+   <td>${esc.siteid}</td>  
+   <td>${esc.sitename}</td> 
+   <td>${esc.technology}</td>  
+   <td>${esc.site_status}</td> 
+   <td>${esc.ro_region}</td>  
+   <td>${esc.project_scope}</td> 
+   <td>${esc.startdate}</td>  
+   <td>${esc.enddate}</td>  
+   <td>${esc.status}</td>  
+   <td>${esc.originator_mail}</td>  
+   <td>${esc.responsible}</td>  
+   <td>${esc.category}</td> 
+   <td>${esc.problem_description}</td>  
+   <td>${esc.requested_action_history}</td>  
+   <td>${esc.mail_reference}</td>  
+   <td>${esc.lead_time_in_days}</td>  
+     
+   <td>${esc.id}</td> 
+   <td><a href="/editescalation/${esc.id}">Edit</a></td>  
    
-         <form:form method="POST" modelAttribute="user" action="update">
-          <table width="50%	" border="1" align="center" height="100">
-            <tr > <td align="center">  <h4>Change Password </h4>  </td></tr>
-            <tr><td> <label for="email">Email  :</label> <form:input path="mailid" type="text" placeholder="Enter Mail ID" name="mailid" disabled="true"/> </td> </tr>
-            <tr><td><label for="email">User name :</label> <form:input path="username" type="text" placeholder="username"  name="username" disabled="true" /></td></tr>
-            <tr><td><label for="Designation">Designation : </label><form:input path="userroll" type="text" placeholder="userroll"  name="userroll" disabled="true"/></td></tr>
-            <tr><td><label for="Designation">Password : </label> <form:input path="userpass" type="password" placeholder="Enter Password" name="userpass"/></td> </tr>
-            
-            <tr><td align="center"><form:button type="submit"  onclick="return Validate()">submit </form:button></td></tr>
-          </table> 
-         </form:form>
+   </tr>  
+   </c:forEach> 
    
    
-   
-   
-   
-   
-   
+   </table>  
+   </div>
        </td>
        
       </tr>

@@ -18,13 +18,54 @@
 	
 </head>
 <body>
+<script>
+            function myFunction()
+               {
+
+                var tocheck = document.getElementById("originator_mail").value;
+                var siteid = document.getElementById("siteid").value;
+                var sitename = document.getElementById("sitename").value;	
+            	var startdate = document.getElementById("startdate").value;
+            	var enddate = document.getElementById("enddate").value;
+            	var status = document.getElementById("status").value;
+                
+                var dis = tocheck.style;
+                console.log(tocheck);
+                console.log(siteid);
+                console.log(sitename);
+                console.log(startdate);
+                console.log(enddate);
+                console.log(status);
+
+                 if(siteid!=="" || sitename!=="" || startdate!=="" || enddate!=="" || status!=="" )
+                     {
+                	 document.getElementById("id").value=0;
+                	 
+                     }
+                
+                
+                if (tocheck>0)
+                {
+                	document.getElementById("siteid").value="";
+                	document.getElementById("sitename").value="";
+                	document.getElementById("startdate").value="";
+                	document.getElementById("enddate").value="";
+                	document.getElementById("status").value="";
+                	
+                }
+                
+                 }
+
+	</script>
+
   <table align="center" border="0" width="100%" >
    <tr id="header" ><td id="logo"><jsp:include page="header.jsp"></jsp:include> </td></tr>
   <tr id="menuheader">
    <td><table border="0" width="100%" align="center">
     <tr><td width="50%" align="right" ><div class="topnav"><a href="#home">Home</a>
           <a href="#">Escalation</a></div></td>
-         <td width="20%" align="left">Welcome.. <font font="2" color=red> ${user.username} </font> </td>                       
+         <td width="20%" align="left">Welcome.. <font font="2" color=red> ${user.username} </font> </td>  
+         <td width="20%" align="left">Designation <font size="3" color=red> ${user.userroll} </font> </td>                      
          <td width="10%" align="right"><a href="${contextPath}/logout" id="log">Logout</a></td> </tr>
       </table>
     </td>
@@ -38,8 +79,8 @@
           <jsp:include page="adminmenu.jsp"></jsp:include>
        </td>
       <td width="85%" align="center">  
-       <font size="4" color="red" face="verdana" > Escalation Form </font>
-      <form:form method="POST" modelAttribute="escalations" action="adminescalationserachdetails">
+       <font size="4" color="red" face="verdana" > Detail Escalation Search  </font>
+      <form:form method="GET" modelAttribute="escalations" action="adminescalationserachdetails">
 	 
 	  <table align=center border="1" style="width:50%">
 	           
@@ -57,18 +98,7 @@
 					 </tr>
 	           
 	           
-	           <tr>
-					<td>Escalation Reference Number </td>
-					
-					<td><form:select path="id" id="id" onchange="myFunction()">
-                         <form:option value="0" label="--- Select ---"/>
-                         <c:forEach var="item" items="${listids}">
-                         <form:option value="${item}">${item}</form:option>
-                        </c:forEach>
-                        
-                        </form:select> <form:errors path="status" cssStyle="color: #ff0000; font-size: 10px;"> </form:errors> 
-					</td>
-					 </tr>
+	       
 				<tr>
 					<td>site ID</td>
 					<td> <form:input type="text" path="siteid" id="siteid" onchange="myFunction()"/> <form:errors path="siteid" cssStyle="color: #ff0000; font-size: 10px;"> </form:errors> </td> </tr>

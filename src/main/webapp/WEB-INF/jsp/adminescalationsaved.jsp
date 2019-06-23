@@ -24,8 +24,8 @@
    <td><table border="0" width="100%" align="center">
     <tr><td width="50%" align="right" ><div class="topnav"><a href="#home">Home</a>
           <a href="#">Escalation</a></div></td>
-         <td width="20%" align="left">Welcome.. <font font="2" color=red> ${user.username} </font> </td> 
-         <td width="20%" align="left">Designation <font size="3" color=red> ${user.userroll} </font> </td>                       
+         <td width="20%" align="left">Welcome.. <font font="2" color=red> ${user.username} </font> </td>  
+         <td width="20%" align="left">Designation <font size="3" color=red> ${user.userroll} </font> </td>                      
          <td width="10%" align="right"><a href="${contextPath}/logout" id="log">Logout</a></td> </tr>
       </table>
     </td>
@@ -36,7 +36,7 @@
       <tr valign="top" height="100" >
       <td width="10%" align="left"> 
       
-      <jsp:include page="escalationsidemenu.jsp"></jsp:include>
+       <jsp:include page="adminmenu.jsp"></jsp:include>
       
        </td>
       <td width="90%" align="center">  

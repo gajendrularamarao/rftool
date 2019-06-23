@@ -58,6 +58,18 @@ public class EscalationService implements IEscalationservice {
 		
 		return escalationsDAO.getEscalationIds();
 	}
+
+	@Override
+	public List<Escalations> getAllEscalations() {
+		// TODO Auto-generated method stub
+		return escalationsDAO.getAllEscalations();
+	}
+
+	@Override
+	public List<Escalations> getEscalationById(int userid) {
+		// TODO Auto-generated method stub
+		return escalationsDAO.getEscalationsById(userid);
+	}
 	
 
 }

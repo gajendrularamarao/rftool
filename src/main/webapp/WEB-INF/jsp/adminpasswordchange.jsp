@@ -92,8 +92,8 @@ document.getElementById("wrap").addEventListener("scroll",function(){
    <td><table border="0" width="100%" align="center">
     <tr><td width="50%" align="right" ><div class="topnav"><a href="#home">Home</a>
           <a href="#">Escalation</a></div></td>
-         <td width="20%" align="left">Welcome.. <font font="2" color=red> ${user.username} </font> </td>  
-         <td width="20%" align="left">Designation <font size="3" color=red> ${user.userroll} </font> </td>                      
+         <td width="20%" align="left">Welcome.. <font font="2" color=red> ${user.username} </font> </td> 
+         <td width="20%" align="left">Designation <font size="3" color=red> ${user.userroll} </font> </td>                       
          <td width="10%" align="right"><a href="${contextPath}/logout" id="log">Logout</a></td> </tr>
       </table>
     </td>
@@ -104,24 +104,26 @@ document.getElementById("wrap").addEventListener("scroll",function(){
       <tr valign="top" height="100" >
       <td width="10%" align="left"> 
       
-      <jsp:include page="escalationsidemenu.jsp"></jsp:include>
+      <jsp:include page="adminmenu.jsp"></jsp:include>
       
        </td>
       <td width="90%" align="center">  
            
        
    
-         <form:form method="POST" modelAttribute="user" action="update">
-          <table width="50%	" border="1" align="center" height="100">
-            <tr > <td align="center">  <h4>Change Password </h4>  </td></tr>
-            <tr><td> <label for="email">Email  :</label> <form:input path="mailid" type="text" placeholder="Enter Mail ID" name="mailid" disabled="true"/> </td> </tr>
-            <tr><td><label for="email">User name :</label> <form:input path="username" type="text" placeholder="username"  name="username" disabled="true" /></td></tr>
-            <tr><td><label for="Designation">Designation : </label><form:input path="userroll" type="text" placeholder="userroll"  name="userroll" disabled="true"/></td></tr>
-            <tr><td><label for="Designation">Password : </label> <form:input path="userpass" type="password" placeholder="Enter Password" name="userpass"/></td> </tr>
+         <table width="80%" border="1" align="center" height="100">
+            <tr><td align="center">  <h2>Your Password successfully Changed ...</h2> </td></tr>
+           
+            <c:forEach var="User" items="${list}"> 
+            <tr><td id="regdisplay" >Your Registration Number :  ${User.userid}</td>  </tr>
+            <tr><td id="regdisplay">your Login ID : ${User.mailid}</td>  </tr>
+            <tr><td id="regdisplay">Name :  ${User.username}</td></tr>
+            <tr><td id="regdisplay">Designation :${User.userroll}</td> </tr>
+            <tr><td id="reg"><a href="/logout">Please Login</a></td> </tr>
             
-            <tr><td align="center"><form:button type="submit"  onclick="return Validate()">submit </form:button></td></tr>
-          </table> 
-         </form:form>
+            </c:forEach>
+           
+            </table>      
    
    
    
