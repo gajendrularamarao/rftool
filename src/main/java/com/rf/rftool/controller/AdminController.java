@@ -145,7 +145,7 @@ public class AdminController {
 		     {
 			
 				System.out.println("ALL Files enter>>>>>>");
-				escalations = escalationService.getEscalationBySerach(user1, siteid, sitename, startdate, enddate, status);
+				escalations = escalationService.getEscalationBySerach(siteid, sitename, startdate, enddate, status);
 				model.addAttribute("escalations",escalations);
 			
 			System.out.println("siteid>>>>"+siteid);

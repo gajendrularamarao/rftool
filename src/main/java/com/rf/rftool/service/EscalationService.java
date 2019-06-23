@@ -70,6 +70,13 @@ public class EscalationService implements IEscalationservice {
 		// TODO Auto-generated method stub
 		return escalationsDAO.getEscalationsById(userid);
 	}
+
+	@Override
+	public List<Escalations> getEscalationBySerach(String siteid, String sitename, String startdate, String enddate,
+			String status) {
+		
+		return escalationsDAO.getEscalationBySerach(siteid, sitename, startdate, enddate, status);
+	}
 	
 
 }

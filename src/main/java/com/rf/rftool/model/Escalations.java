@@ -56,8 +56,8 @@ public class Escalations {
 	@NotNull
 	@NotEmpty
 	private String requested_action_history;
+	
 	@NotEmpty
-	@Email
 	private String mail_reference;
 	
 	@NotNull
