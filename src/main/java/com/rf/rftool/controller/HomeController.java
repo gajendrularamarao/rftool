@@ -144,12 +144,16 @@ public String getHomePage(ModelMap model) {
     System.out.println(user1.getUsername());
     request.getSession().setAttribute("USER_DETAILS",user1);
     model.addAttribute("user", user1);
-    List<Dashboard> dashboard= dashboardDAO.getDashboard(user1);
-	 model.addAttribute("dashboard",dashboard);
+    //List<Dashboard> dashboard= dashboardDAO.getDashboard(user1);
+	
 	if(user1.getUserroll().equalsIgnoreCase("Engineer")){
+		 List<Dashboard> dashboard= dashboardDAO.getDashboard(user1);
+		 model.addAttribute("dashboard",dashboard);	
        return new ModelAndView("userloged");
 	   }else {
-       return new ModelAndView("adminloged");}
+		   List<Dashboard> admindashboard= dashboardDAO.getAdminDashboard();
+			 model.addAttribute("admindashboard",admindashboard);	   
+             return new ModelAndView("adminloged");}
 	
     }
      

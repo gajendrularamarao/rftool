@@ -11,13 +11,38 @@ public class Dashboard implements Serializable{
 	
 	private String responsible;
 	private String project_scope;
+	private String originator_mail;
+	public String getOriginator_mail() {
+		return originator_mail;
+	}
+	public void setOriginator_mail(String originator_mail) {
+		this.originator_mail = originator_mail;
+	}
 	private int closed;
 	private int wip;
 	private int scheduled;
 	private int open; 
+	private int reopen;
+	public int getReopen() {
+		return reopen;
+	}
+	public void setReopen(int reopen) {
+		this.reopen = reopen;
+	}
 	private String status;
 	private int statuscount;
+	private String username;
 	
+	private String mailid;
+	private int userid;
+	private int total;
+	
+	public int getTotal() {
+		return total;
+	}
+	public void setTotal(int total) {
+		this.total = total;
+	}
 	public String getStatus() {
 		return status;
 	}
@@ -72,6 +97,24 @@ public class Dashboard implements Serializable{
 		return serialVersionUID;
 	}
 	
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public String getMailid() {
+		return mailid;
+	}
+	public void setMailid(String mailid) {
+		this.mailid = mailid;
+	}
+	public int getUserid() {
+		return userid;
+	}
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
 	
 
 }

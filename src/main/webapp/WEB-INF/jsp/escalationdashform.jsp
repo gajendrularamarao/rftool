@@ -18,7 +18,7 @@
 	
 </head>
 <body>
-  <table align="center" border="0" width="85%" >
+  <table align="center" border="0" width="100%" >
    <tr id="header" ><td id="logo"><jsp:include page="header.jsp"></jsp:include> </td></tr>
   <tr id="menuheader">
    <td><table border="0" width="100%" align="center">
@@ -31,7 +31,7 @@
    </tr> 
     <tr bgcolor="#E3F1EC">
      <td>
-      <table width="100%"  border="2" align="center" height="450">
+      <table width="100%"  border="2" align="center" height="500">
       <tr valign="top" height="100" >
       <td width="15%" align="left"> 
       

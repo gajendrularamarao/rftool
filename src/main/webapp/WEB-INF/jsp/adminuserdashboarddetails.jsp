@@ -48,7 +48,7 @@ document.getElementById("wrap").addEventListener("scroll",function(){
    <td>
    <table border="0" width="100%" align="center">
     <tr><td width="50%" align="right" ><div class="topnav"><a href="${contextPath}/">Home</a>
-          <a href="#">Escalation</a></div></td>
+          </div></td>
          <td width="20%" align="left">Welcome.. <font size="3" color=red> ${user.username} </font> </td>      
          <td width="20%" align="left">Designation <font size="3" color=red> ${user.userroll} </font> </td>                  
          <td width="10%" align="right"><a href="${contextPath}/logout" id="log">Logout</a></td> </tr>
@@ -61,20 +61,20 @@ document.getElementById("wrap").addEventListener("scroll",function(){
       <tr valign="top" height="100" >
       <td width="10%" align="left"> 
       
-        <jsp:include page="escalationsidemenu.jsp"></jsp:include>
+        <jsp:include page="adminmenu.jsp"></jsp:include>
         
    
        </td>
-      <td width="90%" align="center">  
-     
-       <div id="wrap">   
+      <td width="90%" align="center">   <font size="4" color="red" face="verdana" > User wise Dash Board Details  </font>
+         <div id="wrap">   
 <table  id="tabledis" border="1" style="width:60%" cellpadding="0">
-<tr ><th>Responsible</th><th>Project Scope</th><th>status</th>
+<tr ><th>UserMail ID</th><th>Responsible</th><th>Project Scope</th><th>status</th>
 <th>Count</th>
 </tr>  	
 
    <c:forEach var="esc" items="${dashboard}"> 
    <tr>  
+   <td>${esc.mailid}</td> 
    <td>${esc.responsible}</td>  
    <td>${esc.project_scope}</td> 
    <td>${esc.status}</td>  
@@ -87,6 +87,7 @@ document.getElementById("wrap").addEventListener("scroll",function(){
    
    </table>  
    </div>
+       
       
       
       

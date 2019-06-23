@@ -30,8 +30,8 @@ public class DashboardDAO implements IDashboard {
 	
 			@Override
 		public List<Dashboard> getDashboard(User user) {
-			return template.query("select userid ,responsible , project_scope , status , count(status) from ssaescalation  \n" + 
-					" group  by status ,project_scope , responsible , userid having userid="+ user.getUserid()+ ";",new ResultSetExtractor<List<Dashboard>>(){  
+			return template.query("select userid ,originator_mail ,responsible , project_scope , status , count(status) from ssaescalation  \n" + 
+					" group  by status ,project_scope , responsible , userid ,originator_mail having userid="+ user.getUserid()+ ";",new ResultSetExtractor<List<Dashboard>>(){  
 			    
 			     public List<Dashboard> extractData(ResultSet rs) throws SQLException,  
 			            DataAccessException {  
@@ -39,10 +39,11 @@ public class DashboardDAO implements IDashboard {
 			        List<Dashboard> responsibleList=new ArrayList<Dashboard>();  
 			        while(rs.next()){  
 			        	Dashboard e=new Dashboard();  
-			        	e.setResponsible(rs.getString(2));
-			        	e.setProject_scope(rs.getString(3));
-			        	e.setStatus(rs.getString(4));
-			        	e.setStatuscount(rs.getInt(5));
+			        	e.setMailid(rs.getString(2));
+			        	e.setResponsible(rs.getString(3));
+			        	e.setProject_scope(rs.getString(4));
+			        	e.setStatus(rs.getString(5));
+			        	e.setStatuscount(rs.getInt(6));
 			        	responsibleList.add(e);
 			       
 			        }  
@@ -51,6 +52,60 @@ public class DashboardDAO implements IDashboard {
 			    });
 			
 		}
+
+			@Override
+			public List<Dashboard> getAdminDashboard() {
+				
+				return template.query("select status, count(status) from ssaescalation  group by status;",new ResultSetExtractor<List<Dashboard>>(){  
+				    
+				     public List<Dashboard> extractData(ResultSet rs) throws SQLException,  
+				            DataAccessException {  
+				      
+				        List<Dashboard> mainadmindashboard=new ArrayList<Dashboard>();  
+				        Dashboard e=new Dashboard();
+				        while(rs.next()){  
+				        	  
+				        	if(rs.getString(1).equalsIgnoreCase("Closed"))
+				        		e.setClosed(rs.getInt(2));
+				        	if(rs.getString(1).equalsIgnoreCase("Open"))
+				        		e.setOpen(rs.getInt(2));
+				        	if(rs.getString(1).equalsIgnoreCase("WIP"))
+				        		e.setWip(rs.getInt(2));
+				        	if(rs.getString(1).equalsIgnoreCase("Scheduled"))
+				        		e.setScheduled(rs.getInt(2));
+				        	if(rs.getString(1).equalsIgnoreCase("Reopen"))
+				        		e.setReopen(rs.getInt(2));
+				        }
+				        e.setTotal(e.getClosed()+e.getOpen()+e.getWip()+e.getScheduled()+e.getReopen());
+				        mainadmindashboard.add(e);
+				        return mainadmindashboard;  
+				        }  
+				    });
+			}
+
+			@Override
+			public List<Dashboard> getDashboardAll() {
+				return template.query("select userid ,originator_mail ,responsible , project_scope , status , count(status) from ssaescalation  \n" + 
+						" group  by status ,project_scope , responsible , userid ,originator_mail",new ResultSetExtractor<List<Dashboard>>(){  
+				    
+				     public List<Dashboard> extractData(ResultSet rs) throws SQLException,  
+				            DataAccessException {  
+				      
+				        List<Dashboard> responsibleList=new ArrayList<Dashboard>();  
+				        while(rs.next()){  
+				        	Dashboard e=new Dashboard();  
+				        	e.setMailid(rs.getString(2));
+				        	e.setResponsible(rs.getString(3));
+				        	e.setProject_scope(rs.getString(4));
+				        	e.setStatus(rs.getString(5));
+				        	e.setStatuscount(rs.getInt(6));
+				        	responsibleList.add(e);
+				       
+				        }  
+				        return responsibleList;  
+				        }  
+				    });
+			}
 	
 	
 }

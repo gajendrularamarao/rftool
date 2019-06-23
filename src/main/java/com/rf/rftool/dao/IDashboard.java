@@ -8,5 +8,6 @@ import java.util.List;
 public interface IDashboard {
 
 	public List<Dashboard> getDashboard (User user);
-	
+	public List<Dashboard> getAdminDashboard();
+	public List<Dashboard> getDashboardAll();
 }

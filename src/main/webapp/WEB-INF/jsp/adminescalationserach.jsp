@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -15,53 +16,8 @@
 	<link href="${contextPath}/css/custom.css"      rel="stylesheet">
 	<link href="${contextPath}/css/main.css"      rel="stylesheet">
 	
-	
-	
 </head>
 <body>
-   
-
-<script>
-            function myFunction()
-               {
-
-                var tocheck = document.getElementById("id").value;
-                var siteid = document.getElementById("siteid").value;
-                var sitename = document.getElementById("sitename").value;	
-            	var startdate = document.getElementById("startdate").value;
-            	var enddate = document.getElementById("enddate").value;
-            	var status = document.getElementById("status").value;
-                
-                var dis = tocheck.style;
-                console.log(tocheck);
-                console.log(siteid);
-                console.log(sitename);
-                console.log(startdate);
-                console.log(enddate);
-                console.log(status);
-
-                 if(siteid!=="" || sitename!=="" || startdate!=="" || enddate!=="" || status!=="" )
-                     {
-                	 document.getElementById("id").value=0;
-                	 
-                     }
-                
-                
-                if (tocheck>0)
-                {
-                	document.getElementById("siteid").value="";
-                	document.getElementById("sitename").value="";
-                	document.getElementById("startdate").value="";
-                	document.getElementById("enddate").value="";
-                	document.getElementById("status").value="";
-                	
-                }
-                
-                 }
-
-	</script>
-
-
   <table align="center" border="0" width="100%" >
    <tr id="header" ><td id="logo"><jsp:include page="header.jsp"></jsp:include> </td></tr>
   <tr id="menuheader">
@@ -77,16 +33,29 @@
      <td>
       <table width="100%"  border="2" align="center" height="500">
       <tr valign="top" height="100" >
-      <td width="10%" align="left"> 
+      <td width="15%" align="left"> 
       
-      <jsp:include page="escalationsidemenu.jsp"></jsp:include>
-      
+          <jsp:include page="adminmenu.jsp"></jsp:include>
        </td>
-      <td width="90%" align="center">  
-           <font size="4" color="red" face="verdana" > Escalation Search </font>
-        <form:form method="GET" modelAttribute="escalations" action="search">
-        
-        <table align=center border="1" style="width:50%">
+      <td width="85%" align="center">  
+       <font size="4" color="red" face="verdana" > Escalation Form </font>
+      <form:form method="POST" modelAttribute="escalations" action="adminescalationserachdetails">
+	 
+	  <table align=center border="1" style="width:50%">
+	           
+	              <tr>
+					<td>User Mail-ID </td>
+					
+					<td><form:select path="originator_mail" id="originator_mail" onchange="myFunction()">
+                         <form:option value="0" label="--- Select ---"/>
+                         <c:forEach var="item" items="${list}">
+                         <form:option value="${item.userid}">${item.mailid}</form:option>
+                        </c:forEach>
+                        
+                        </form:select> <form:errors path="status" cssStyle="color: #ff0000; font-size: 10px;"> </form:errors> 
+					</td>
+					 </tr>
+	           
 	           
 	           <tr>
 					<td>Escalation Reference Number </td>
@@ -125,10 +94,9 @@
 				</tr>
 				<tr> <td> <input type="submit" value="Escalation Serach" class="btn btn-primary btn-sm"> </td> </tr>
 				
-			</table>	
-        
-        </form:form>
-         
+			</table>
+	  
+	  	</form:form>
       
       
      </td>

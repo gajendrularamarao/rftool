@@ -628,6 +628,24 @@ public Escalations update(Escalations e, User user) {
   
 }
 
+@Override
+public List<Integer> getEscalationIds() {
+	String sql ="select id from ssaescalation;";
+	System.out.println(sql);
+	
+	return template.query("select id from ssaescalation;",new ResultSetExtractor<List<Integer>>(){  
+	    
+	     public List<Integer> extractData(ResultSet rs) throws SQLException,  
+	            DataAccessException {  
+	        List<Integer> list=new ArrayList<Integer>();  
+	        while(rs.next()){  
+              list.add(rs.getInt(1));
+	        }  
+	        return list;  
+	        }  
+	    });
+}
+
 
 	
 }

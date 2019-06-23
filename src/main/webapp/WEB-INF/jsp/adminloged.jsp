@@ -42,7 +42,7 @@ document.getElementById("wrap").addEventListener("scroll",function(){
 	
 </head>
 <body>
-  <table align="center" border="0" width="85%" >
+  <table align="center" border="0" width="100%" >
    <tr id="header" ><td id="logo"><jsp:include page="header.jsp"></jsp:include> </td></tr>
   <tr id="menuheader">
    <td>
@@ -57,7 +57,7 @@ document.getElementById("wrap").addEventListener("scroll",function(){
    </tr> 
     <tr bgcolor="#E3F1EC">
      <td>
-      <table width="100%"  border="2" align="center" height="450">
+      <table width="100%"  border="2" align="center" height="500">
       <tr valign="top" height="100" >
       <td width="10%" align="left"> 
       
@@ -69,17 +69,19 @@ document.getElementById("wrap").addEventListener("scroll",function(){
      
        <div id="wrap">   
 <table  id="tabledis" border="1" style="width:60%" cellpadding="0">
-<tr ><th>Responsible</th><th>Project Scope</th><th>status</th>
-<th>Count</th>
+<tr><font size="4" color="red" face="verdana" > Escalation Dash Board  </font>  </tr>
+<tr ><th>Open</th><th>Close</th><th>WIP</th><th>Scheduled</th>
+<th>ReOpen</th><th>Total</th>
 </tr>  	
 
-   <c:forEach var="esc" items="${dashboard}"> 
+   <c:forEach var="esc" items="${admindashboard}"> 
    <tr>  
-   <td>${esc.responsible}</td>  
-   <td>${esc.project_scope}</td> 
-   <td>${esc.status}</td>  
-   <td>${esc.statuscount}</td> 
-   
+   <td>${esc.open}</td>  
+   <td>${esc.closed}</td> 
+   <td>${esc.wip}</td>  
+   <td>${esc.scheduled}</td> 
+   <td>${esc.reopen}</td> 
+   <td>${esc.total}</td> 
    
    </tr>  
    </c:forEach> 

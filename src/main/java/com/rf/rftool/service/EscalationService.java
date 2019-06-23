@@ -52,6 +52,12 @@ public class EscalationService implements IEscalationservice {
 		
 		return escalationsDAO.update(e, user);
 	}
+
+	@Override
+	public List<Integer> getEscalationIds() {
+		
+		return escalationsDAO.getEscalationIds();
+	}
 	
 
 }

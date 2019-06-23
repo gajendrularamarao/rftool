@@ -18,7 +18,7 @@
 	
 </head>
 <body>
-  <table align="center" border="0" width="85%" >
+  <table align="center" border="0" width="100%" >
    <tr id="header" ><td id="logo"><jsp:include page="header.jsp"></jsp:include> </td></tr>
   <tr id="menuheader">
    <td><table border="0" width="100%" align="center">
@@ -30,7 +30,7 @@
    </tr> 
     <tr bgcolor="#E3F1EC">
     <td>
-      <table width="100%"  border="2" align="center" height="450">
+      <table width="100%"  border="2" align="center" height="500">
       <tr valign="middle" height="100" >
       <td width="50%" align="left"> <p  style="text-align:justify"> <font face="verdana" color=red size=3 > Fourth generation wireless system is a packet switched wireless 
        system with wide area coverage and high throughput. It is designed to be cost effective and to provide high 
