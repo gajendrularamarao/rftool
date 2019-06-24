@@ -1,3 +1,5 @@
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+ <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
   <table> 
       <tr><td id="reg"><a style="text-decoration:none" href="${contextPath}/admindashform"> <font color="red"> Escalation DashBoard</font></a></td></tr>
        <tr><td id="reg"><a style="text-decoration:none" href="${contextPath}/adminuserdashform"> <font color="red"> User's DashBoard</font></a></td></tr>
