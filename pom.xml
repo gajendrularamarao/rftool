@@ -11,7 +11,7 @@
 	<packaging>war</packaging>
 	<groupId>com.example</groupId>
 	<artifactId>rftool</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1</version>
 	<name>rftool</name>
 	<description>Telecommunication Project</description>
 
@@ -43,16 +43,18 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>8.0.15</version><!--$NO-MVN-MAN-VER$-->
 		</dependency>
+		
 	  <dependency>
         <groupId>org.apache.tomcat.embed</groupId>
         <artifactId>tomcat-embed-jasper</artifactId>
-        <version>9.0.11</version><!--$NO-MVN-MAN-VER$-->
+        <version>9.0.11</version>
       </dependency>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
-			<scope>provided</scope>
-		</dependency>
+      
+		 <dependency>
+	<groupId>jstl</groupId>
+	<artifactId>jstl</artifactId>
+	<version>1.2</version>
+  </dependency>
 		<dependency>
     <groupId>net.sourceforge.jexcelapi</groupId>
     <artifactId>jxl</artifactId>
