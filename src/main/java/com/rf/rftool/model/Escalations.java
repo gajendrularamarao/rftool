@@ -1,5 +1,7 @@
 package com.rf.rftool.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -8,7 +10,7 @@ import javax.validation.constraints.Past;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-public class Escalations {
+public class Escalations implements Serializable {
 	
 	@NotNull
 	private int id;

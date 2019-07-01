@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -64,6 +66,9 @@ public class HomeController {
 	    
 	    @Autowired
 	    private TechnologyDAO technologyDAO;
+	    
+	    @Autowired
+	    private ServletContext context;
 	    
 	
 		@RequestMapping(value ="/enroll",method = RequestMethod.GET)
@@ -277,17 +282,19 @@ public String viewescalationdetails(@RequestParam int userid ) {
 @RequestMapping(value="/search", method = RequestMethod.GET)
 public String getescalationsearch(ModelMap model  ,@RequestParam("id") int id, @RequestParam("siteid") String siteid ,
 		@RequestParam("sitename") String sitename , @RequestParam("startdate") String startdate , @RequestParam("enddate") String enddate , 
-		@RequestParam("status") String status ,HttpSession session) {
+		@RequestParam("status") String status ,HttpSession session ,HttpServletRequest request) {
 	
 	System.out.println("the ID is >>>>"+id);
 	List<Escalations> escalations;
 	User user1 = (User) session.getAttribute("USER_DETAILS");
+	
 	model.addAttribute("user",user1);
 	
 	if(id>0)
 	{
 		escalations = escalationService.getEscalationById(user1, id);
 		model.addAttribute("escalations",escalations);
+		request.getSession().setAttribute("ESCALATIONS",escalations);
 		System.out.println("ID>>>>"+id);
 		
 	}else {
@@ -298,6 +305,7 @@ public String getescalationsearch(ModelMap model  ,@RequestParam("id") int id, @
 			System.out.println("ALL Files enter>>>>>>");
 			escalations = escalationService.getEscalationBySerach(user1, siteid, sitename, startdate, enddate, status);
 			model.addAttribute("escalations",escalations);
+			request.getSession().setAttribute("ESCALATIONS",escalations);
 		
 		System.out.println("siteid>>>>"+siteid);
 		System.out.println("sitename>>>"+sitename);
@@ -308,8 +316,9 @@ public String getescalationsearch(ModelMap model  ,@RequestParam("id") int id, @
 	      }else {
 	    	  System.out.println("kkkkkk");
 	    	  escalations = escalationService.getAllEscalations(user1);
-	    		model.addAttribute("escalations",escalations);
-	    		System.out.println("all feilds are Not nulll>>>>"+id);
+	    	  model.addAttribute("escalations",escalations);
+	    	  request.getSession().setAttribute("ESCALATIONS",escalations);
+	    	  System.out.println("all feilds are Not nulll>>>>"+id);
 	    		
 	        }
 	}
@@ -370,6 +379,17 @@ public ModelAndView userdashboard(ModelMap model, HttpSession session){
    
 } 
 
+@RequestMapping(value="/downloadexcle")
+public void downloadexcle(HttpServletRequest request ,  HttpServletResponse  response , HttpSession session ) {
+	
+	@SuppressWarnings("unchecked")
+	List<Escalations> escalations = (List<Escalations>) session.getAttribute("ESCALATIONS");
+	boolean isflag = escalationService.createExcle(escalations , context ,request ,response);
+	if(isflag) {
+		String fullpath = request.getSession().getServletContext().getRealPath("/WEB-INF/excel/escalations.xls");
+		escalationService.filedownload(fullpath , context , response , "escalations.xls" );
+	}
+}
 
 
 }
