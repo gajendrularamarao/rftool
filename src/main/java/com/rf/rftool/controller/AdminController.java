@@ -126,7 +126,7 @@ public class AdminController {
 	@RequestMapping(value="/adminescalationserachdetails", method = RequestMethod.GET)
 	public String getescalationsearch(ModelMap model  ,@RequestParam("originator_mail") int originator_mail, @RequestParam("siteid") String siteid ,
 			@RequestParam("sitename") String sitename , @RequestParam("startdate") String startdate , @RequestParam("enddate") String enddate , 
-			@RequestParam("status") String status ,HttpSession session) {
+			@RequestParam("status") String status ,HttpSession session , HttpServletRequest request) {
 		
 		System.out.println("the ID is >>>>"+originator_mail);
 		List<Escalations> escalations;
@@ -137,6 +137,7 @@ public class AdminController {
 		{
 			escalations = escalationService.getEscalationById(originator_mail);
 			model.addAttribute("escalations",escalations);
+			request.getSession().setAttribute("ESCALATIONS",escalations);
 			System.out.println("ID>>>>"+originator_mail);
 			
 		}else {
@@ -147,18 +148,13 @@ public class AdminController {
 				System.out.println("ALL Files enter>>>>>>");
 				escalations = escalationService.getEscalationBySerach(siteid, sitename, startdate, enddate, status);
 				model.addAttribute("escalations",escalations);
-			
-			System.out.println("siteid>>>>"+siteid);
-			System.out.println("sitename>>>"+sitename);
-			System.out.println("startdate>>>>"+startdate);
-			System.out.println("enddate>>>>"+enddate);
-			System.out.println("status>>>>"+status);
-			
-		      }else {
+				request.getSession().setAttribute("ESCALATIONS",escalations);
+			  }else {
 		    	  System.out.println("kkkkkk");
 		    	  escalations = escalationService.getAllEscalations();
 		    	  model.addAttribute("escalations",escalations);
-		    		System.out.println("all feilds are Not nulll>>>>"+originator_mail);
+		    	  request.getSession().setAttribute("ESCALATIONS",escalations);
+		    	  System.out.println("all feilds are Not nulll>>>>"+originator_mail);
 		    		
 		        }
 		}

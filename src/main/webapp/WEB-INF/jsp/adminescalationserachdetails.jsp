@@ -145,6 +145,7 @@ document.getElementById("wrap").addEventListener("scroll",function(){
        </td>
       <td width="90%" align="center">  
            <font size="4" color="red" face="verdana" > Escalation Search  </font> 
+           <a href="${contextPath}/downloadexcle" id="log">downloadexcle</a> 
            <button id="export" onclick="ExportFile()">Download Report</button>  
        
    <div id="wrap">   
