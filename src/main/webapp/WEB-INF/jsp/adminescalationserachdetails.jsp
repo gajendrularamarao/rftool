@@ -180,7 +180,7 @@ document.getElementById("wrap").addEventListener("scroll",function(){
    <td>${esc.lead_time_in_days}</td>  
      
    <td>${esc.id}</td> 
-   <td><a href="/editescalation/${esc.id}">Edit</a></td>  
+   <td><a href="${contextPath}/editescalationadmin/${esc.id}">Edit</a></td>  
    
    </tr>  
    </c:forEach> 

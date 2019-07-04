@@ -698,10 +698,10 @@ public List<Escalations> getAllEscalations() {
 
 @Override
 public List<Escalations> getEscalationsById(int userid) {
-	String sql ="select * from ssaescalation where userid="+userid+" ;";
+	String sql ="select * from ssaescalation where id="+userid+" ;";
 	System.out.println(sql);
 	
-	return template.query("select * from ssaescalation where userid="+userid+";",new ResultSetExtractor<List<Escalations>>(){  
+	return template.query("select * from ssaescalation where id="+userid+";",new ResultSetExtractor<List<Escalations>>(){  
 	    
 	     public List<Escalations> extractData(ResultSet rs) throws SQLException,  
 	            DataAccessException {  
@@ -1095,6 +1095,53 @@ public List<Escalations> getEscalationBySerach(String siteid, String sitename, S
     }
     
 return list;
+}
+
+@Override
+public List<Escalations> getEscalationsByuserId(int userid) {
+	String sql ="select * from ssaescalation where id="+userid+" ;";
+	System.out.println(sql);
+	
+	return template.query("select * from ssaescalation where userid="+userid+";",new ResultSetExtractor<List<Escalations>>(){  
+	    
+	     public List<Escalations> extractData(ResultSet rs) throws SQLException,  
+	            DataAccessException {  
+	      
+	        List<Escalations> list=new ArrayList<Escalations>();  
+	        while(rs.next()){  
+	        Escalations e=new Escalations();  
+	        e.setSiteid(rs.getString(1));
+	        e.setSitename(rs.getString(2));
+	        e.setTechnology(rs.getString(3));
+	        e.setSite_status(rs.getString(4));
+	        e.setRo_region(rs.getString(5));
+	        e.setProject_scope(rs.getString(6));
+	        e.setStartdate(rs.getString(7));
+	        e.setEnddate(rs.getString(8));
+	        e.setStatus(rs.getString(9));
+	        e.setOriginator_mail(rs.getString(10));
+	        e.setResponsible(rs.getString(11));
+	        e.setCategory(rs.getString(12));
+	        e.setProblem_description(rs.getString(13));
+	        e.setRequested_action_history(rs.getString(14));
+	        e.setMail_reference(rs.getString(15));
+	        
+	        if(rs.getString(8)==null) {
+	        	System.out.println("......No of Days >>>>>>>>+NULL");
+	        e.setLead_time_in_days(getDateDifferences(rs.getString(7)));
+	        }
+	        else
+	        {
+	        e.setLead_time_in_days(getDateDifferences(rs.getString(7), rs.getString(8) ));
+	        }
+	        e.setId(rs.getInt(18));
+	       
+	        
+	        list.add(e);  
+	        }  
+	        return list;  
+	        }  
+	    });
 }
 
 

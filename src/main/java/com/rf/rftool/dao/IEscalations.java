@@ -12,7 +12,8 @@ public interface IEscalations {
 	public List<Escalations> getAllEscalations(User user);
 	public List<Escalations> getAllEscalations();
 	public List<Escalations> getEscalationsById(User user , int id);
-	public List<Escalations> getEscalationsById(int userid);
+	public List<Escalations> getEscalationsById(int id);
+	public List<Escalations> getEscalationsByuserId(int userid);
 	public List<Integer> getEscalationIds(User user);
 	public List<Integer> getEscalationIds();
 	public List<Escalations> getEscalationBySerach(User user, String siteid, String sitename, String startdate,

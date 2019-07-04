@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -135,7 +136,7 @@ public class AdminController {
 		
 		if(originator_mail>0)
 		{
-			escalations = escalationService.getEscalationById(originator_mail);
+			escalations = escalationService.getEscalationsByuserId(originator_mail);
 			model.addAttribute("escalations",escalations);
 			request.getSession().setAttribute("ESCALATIONS",escalations);
 			System.out.println("ID>>>>"+originator_mail);
@@ -247,6 +248,41 @@ public class AdminController {
 			
 		}
 	 
-	 	 
+	 @RequestMapping(value="/editescalationadmin/{id}")  
+	 public String edit(@PathVariable int id,ModelMap model ,HttpSession session){  
+	 	User user1 = (User) session.getAttribute("USER_DETAILS");
+	 	List<Escalations> escalations;
+	 	escalations=escalationService.getEscalationById(id);
+	 	
+	 	List<Status> statuslist= statusService.getStatusList();
+	 	List<Category> categoryList = categoryDAO.getCategoryList();
+	 	List<Projectscope> projectscopelist = projectscopeDAO.getProjectscopeList();
+	 	List<Responsible> responsiblelist = responsibleDAO.getResponsibleList();
+	 	List<Technology>  technologylist = technologyDAO.getTechnologyList();
+	 	
+	 	model.addAttribute("user",user1);
+	 	model.addAttribute("statuslist",statuslist);
+	 	model.addAttribute("categoryList" ,categoryList);
+	 	model.addAttribute("projectscopelist",projectscopelist);
+	 	model.addAttribute("responsiblelist", responsiblelist);
+	 	model.addAttribute("escalations",escalations.get(0));
+	 	model.addAttribute("technologylist", technologylist);
+	 	return "admineditescalationfrom";
+	 }	 	 
+	 
+	 @RequestMapping(value="/editscalationadmin" , method = RequestMethod.POST)
+	 public ModelAndView editscalation(@Valid @ModelAttribute("escalations")Escalations escalations,
+	 		BindingResult bindingResult, ModelMap model,RedirectAttributes redirectAttributes,HttpSession session){  
+	 	User user1 = (User) session.getAttribute("USER_DETAILS");
+	 	Escalations escalations1;
+	 	escalations1=escalationService.update(escalations, user1);	
+	 	model.addAttribute("user",user1);
+	 	model.addAttribute("escalations",escalations1);
+	 	List<Escalations> list= new ArrayList<Escalations>();
+	  	list.add(escalations1);
+	 		
+	 		return new ModelAndView("updatedescalationadmin", "list",list);
+	 }
+	 
 	 
 }

@@ -36,11 +36,12 @@
       <tr valign="top" height="100" >
       <td width="15%" align="left"> 
       
-        <jsp:include page="escalationsidemenu.jsp"></jsp:include>
+        <jsp:include page="adminmenu.jsp"></jsp:include>
+        
        </td>
       <td width="85%" align="center">  
        <font size="4" color="red" face="verdana" > Escalation Update Form </font>
-      <form:form method="POST" modelAttribute="escalations" action="${contextPath}/editscalation">
+      <form:form method="POST" modelAttribute="escalations" action="${contextPath}/editscalationadmin">
 	 
 	  <table align=center border="1" style="width:70%">
 	        

@@ -256,6 +256,12 @@ public class EscalationService implements IEscalationservice {
 	   
 	   
    }
+
+@Override
+public List<Escalations> getEscalationsByuserId(int userid) {
+	// TODO Auto-generated method stub
+	return escalationsDAO.getEscalationsByuserId(userid);
+}
 	
 	
 }
