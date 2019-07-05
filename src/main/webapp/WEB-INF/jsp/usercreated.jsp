@@ -22,7 +22,7 @@
    <tr id="header" ><td id="logo"><jsp:include page="header.jsp"></jsp:include> </td></tr>
   <tr id="menuheader">
    <td><table border="0" width="100%" align="center">
-    <tr><td width="50%" align="right" ><div class="topnav"><a href="/">Home</a>
+    <tr><td width="50%" align="right" ><div class="topnav"><a href="${contextPath}/">Home</a>
          <td width="20%" align="left">Welcome.. </td>                       
         </tr>
       </table>
@@ -52,7 +52,7 @@
             <tr><td id="regdisplay">your Login ID : ${User.mailid}</td>  </tr>
             <tr><td id="regdisplay">Name :  ${User.username}</td></tr>
             <tr><td id="regdisplay">Designation :${User.userroll}</td> </tr>
-            <tr><td id="reg"><a href="/">Please Login</a></td> </tr>
+            <tr><td id="reg"><a href="${contextPath}/">Please Login</a></td> </tr>
             
             </c:forEach>
             </table>      
