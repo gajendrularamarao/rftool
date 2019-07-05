@@ -151,14 +151,14 @@ public String getHomePage(ModelMap model) {
     model.addAttribute("user", user1);
     //List<Dashboard> dashboard= dashboardDAO.getDashboard(user1);
 	
-	if(user1.getUserroll().equalsIgnoreCase("Engineer")){
-		 List<Dashboard> dashboard= dashboardDAO.getDashboard(user1);
-		 model.addAttribute("dashboard",dashboard);	
-       return new ModelAndView("userloged");
-	   }else {
-		   List<Dashboard> admindashboard= dashboardDAO.getAdminDashboard();
+    if(user1.getUserroll().equalsIgnoreCase("Manager")){
+		List<Dashboard> admindashboard= dashboardDAO.getAdminDashboard();
 			 model.addAttribute("admindashboard",admindashboard);	   
-             return new ModelAndView("adminloged");}
+             return new ModelAndView("adminloged");} 
+	    else {		   
+	List<Dashboard> dashboard= dashboardDAO.getDashboard(user1);
+		 model.addAttribute("dashboard",dashboard);	
+       return new ModelAndView("userloged");}
 	
     }
      

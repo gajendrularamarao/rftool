@@ -32,15 +32,17 @@
     <td>
       <table width="100%"  border="2" align="center" height="500">
       <tr valign="middle" height="100" >
-      <td width="50%" align="left"> <p  style="text-align:justify"> <font face="verdana" color=red size=3 > Fourth generation wireless system is a packet switched wireless 
-       system with wide area coverage and high throughput. It is designed to be cost effective and to provide high 
-       spectral efficiency . The 4g wireless uses Orthogonal Frequency Division Multiplexing (OFDM),
-       Ultra Wide Radio Band (UWB),and Millimeter wireless. 
-       Data rate of 20mbps is employed. Mobile speed will be up to 200km/hr.
-       The high performance is achieved by the use of long term channel prediction, 
-       in both time and frequency, scheduling among users and smart antennas 
-       combined with adaptive modulation and power control. Frequency band is 2-8 GHz. 
-       it gives the ability for world wide roaming to access cell anywhere.</font></p>  </td>
+      <td width="50%" align="left"> <p  style="text-align:justify"> <font face="verdana" color=blue size=3 > OX Escalation Tool useful to track issues in all technologies,and the Usage is divided in to 3 parts.</br>
+1. Escalation post useful to enter the site issues.</br>
+2. Escalation Dashboard will helpful to know the summary of closed and open cases.</br>
+3. Escalation search will helpful to search the issue cases in different scenarios, like</br>
+	a. All raised cases can get with direct click: (Escalation Search).</br>
+	b. Specific raised cases can get with given conditions.</br>
+	c. User can download his/her all raised cases.</br></br>
+	</br>
+</br>
+Submit Click to send email to respective teams with attachments will be coming soon.......  &#128522; 
+</font></p>  </td>
       
       <td width="50%" align="center">  
      
