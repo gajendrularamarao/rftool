@@ -119,7 +119,7 @@ document.getElementById("wrap").addEventListener("scroll",function(){
             <tr><td id="regdisplay">your Login ID : ${User.mailid}</td>  </tr>
             <tr><td id="regdisplay">Name :  ${User.username}</td></tr>
             <tr><td id="regdisplay">Designation :${User.userroll}</td> </tr>
-            <tr><td id="reg"><a href="/logout">Please Login</a></td> </tr>
+            <tr><td id="reg"><a href="${contextPath}/">Please Login</a></td> </tr>
             
             </c:forEach>
            
