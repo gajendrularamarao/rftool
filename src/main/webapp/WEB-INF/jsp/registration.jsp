@@ -34,9 +34,9 @@
    <tr id="header" ><td id="logo"><jsp:include page="header.jsp"></jsp:include> </td></tr>
   <tr id="menuheader">
    <td><table border="0" width="100%" align="center">
-    <tr><td width="50%" align="right" ><div class="topnav"><a href="/">Home</a>
+    <tr><td width="50%" align="right" ><div class="topnav"><a href="${contextPath}/">Home</a>
          <td width="20%" align="left"> Welcome.. </td>  
-                               
+          <td align="left" id="reg"><div class="topnav"><a href="${contextPath}/">Login</a></div></td>                     
         </tr>
       </table>
     </td>
@@ -67,7 +67,7 @@ Submit Click to send email to respective teams with attachments will be coming s
             <tr><td><label for="Designation">Password : </label> <form:input path="userpass" type="password" placeholder="Enter Password" name="userpass"/><form:errors path="userpass" cssStyle="color: #ff0000; font-size: 10px;"></form:errors></td> </tr>
             <tr><td> <label for="psw-repeat">Confirm Password : </label>
             <input type="password" placeholder="Confirm Password" name="psw-repeat"></td><tr>
-            <tr><td align="center"><form:button type="submit" id="loginbutton" onclick="return Validate()">submit </form:button></td></tr>
+            <tr><td align="center"><form:button type="submit" id="loginbutton" onclick="return Validate()">submit </form:button>   </td></tr>
           </table> 
          </form:form>
         </div>

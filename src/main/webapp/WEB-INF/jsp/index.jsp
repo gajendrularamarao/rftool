@@ -22,7 +22,7 @@
    <tr id="header" ><td id="logo"><jsp:include page="header.jsp"></jsp:include> </td></tr>
   <tr id="menuheader">
    <td><table border="0" width="100%" align="center">
-    <tr><td width="50%" align="right" ><div class="topnav"><a href="/">Home</a>
+    <tr><td width="50%" align="right" ><div class="topnav"><a href="${contextPath}/">Home</a>
          <td width="20%" align="left">Welcome.. </td>                       
         </tr>
       </table>
