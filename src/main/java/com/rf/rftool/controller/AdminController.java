@@ -134,20 +134,20 @@ public class AdminController {
 		User user1 = (User) session.getAttribute("USER_DETAILS");
 		model.addAttribute("user",user1);
 		
-		if(originator_mail>0)
+		/*if(originator_mail>0)
 		{
 			escalations = escalationService.getEscalationsByuserId(originator_mail);
 			model.addAttribute("escalations",escalations);
 			request.getSession().setAttribute("ESCALATIONS",escalations);
 			System.out.println("ID>>>>"+originator_mail);
 			
-		}else {
+		}else {*/
 			
-			if( siteid!="" || sitename!="" || startdate!="" || enddate!="" || status!="" )
+			if( siteid!="" || sitename!="" || startdate!="" || enddate!="" || status!="" || originator_mail>0 )
 		     {
 			
 				System.out.println("ALL Files enter>>>>>>");
-				escalations = escalationService.getEscalationBySerach(siteid, sitename, startdate, enddate, status);
+				escalations = escalationService.getEscalationByAdminSerach( originator_mail , siteid, sitename, startdate, enddate, status);
 				model.addAttribute("escalations",escalations);
 				request.getSession().setAttribute("ESCALATIONS",escalations);
 			  }else {
@@ -158,7 +158,7 @@ public class AdminController {
 		    	  System.out.println("all feilds are Not nulll>>>>"+originator_mail);
 		    		
 		        }
-		}
+		//}
 		return "adminescalationserachdetails";
 		
 		}

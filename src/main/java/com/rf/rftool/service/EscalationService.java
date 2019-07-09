@@ -84,10 +84,10 @@ public class EscalationService implements IEscalationservice {
 	}
 
 	@Override
-	public List<Escalations> getEscalationBySerach(String siteid, String sitename, String startdate, String enddate,
+	public List<Escalations> getEscalationByAdminSerach(int userid, String siteid, String sitename, String startdate, String enddate,
 			String status) {
 		
-		return escalationsDAO.getEscalationBySerach(siteid, sitename, startdate, enddate, status);
+		return escalationsDAO.getEscalationByAdminSerach(userid , siteid, sitename, startdate, enddate, status);
 	}
 	
 

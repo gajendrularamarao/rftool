@@ -16,6 +16,6 @@ public interface IEscalationservice {
 	public List<Integer> getEscalationIds(User user);
 	public List<Integer> getEscalationIds();
 	public List<Escalations> getEscalationBySerach( User user , String siteid , String sitename , String startdate , String enddate , String status);
-	public List<Escalations> getEscalationBySerach( String siteid , String sitename , String startdate , String enddate , String status);
+	public List<Escalations> getEscalationByAdminSerach( int userid, String siteid , String sitename , String startdate , String enddate , String status);
 
 }
